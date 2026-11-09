@@ -266,7 +266,7 @@
   .result .foot { text-align:center; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:#9A8790; line-height:1.8; }
   .result .foot .hot { font-size:19px; font-weight:800; color:#5AA9FF; letter-spacing:1px; margin-bottom:6px; text-shadow:0 0 18px rgba(90,169,255,.35); }
   .result .foot .sign { margin-top:14px; font-size:11px; color:#6F5E66; line-height:1.9; }
-  .result .foot .sign span { font-size:10px; color:#5A4C53; letter-spacing:1px; }
+  .result .foot .sign span { display:block; text-align:center; font-size:10px; color:#5A4C53; letter-spacing:1px; }
   /* ===== 首页标识 ===== */
   .logo-img { width:86px; height:86px; border-radius:50%; object-fit:cover; display:block; box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 0 2px rgba(255,255,255,.12); }
 
@@ -444,7 +444,7 @@
     <p>凌晨一点，你刷到一条「同城约爱」广告：<br>「美女上门 · 充值会员 · 做任务返利」<br>点一下，就有人主动加你好友。</p>
     <div class="meta">全程模拟<br>人物与平台均虚构<br>形象由 AI 生成 · 非真实人物<br>不产生任何真实资金往来</div>
     <div class="note">📌 说明：本作品仅用于反诈宣传。网页、APP、聊天记录均为虚构；画面不展示任何真实或露骨内容；「约爱」「上门」「返利」等字眼是诈骗分子的引流话术，不代表任何真实服务。</div>
-    <div class="wcopy">版权所有：桂林市公安局秀峰分局反诈中心</div>
+    <div class="wcopy">版权所有：桂林市公安局秀峰分局</div>
 	<div class="wcopy">创作人：高天祥、吴雨轩</div>
     <div class="fixed-cta"><button onclick="startSim()">开始体验</button></div>
   </section>
@@ -1916,7 +1916,7 @@ function renderResult(n){
 
   html += "<div class='foot'><div class='hot'>📞 96110</div>" +
     "<p>桂林市公安局反诈中心 96110 反诈专线，24 小时受理咨询与报警<br>请下载 <b>国家反诈中心 App</b>，开启来电预警</p>" +
-    "<div class='sign'>—— 桂林市公安局秀峰分局反诈中心 · 沉浸式反诈体验 ——<br>AI 人像仅作反诈演示 · 非真实人物<br>相关咨询：请拨打 96110<br>转发给还在刷单、刷「附近的人」的朋友<br><span>版权所有：桂林市公安局秀峰分局反诈中心</span></div></div>";
+    "<div class='sign'>—— 桂林市公安局秀峰分局反诈中心 · 沉浸式反诈体验 ——<br>AI 人像仅作反诈演示 · 非真实人物<br>相关咨询：请拨打 96110<br>转发给还在刷单、刷「附近的人」的朋友<br><span>版权所有：桂林市公安局秀峰分局</span><span>创作者：高天祥、吴雨轩</span></div></div>";
 
   html += "<div class='fixed-cta'><button onclick='restartSim()'>再体验一次</button></div>";
 
