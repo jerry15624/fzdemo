@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0C0914">
+<link rel="preload" as="image" href="照片/logo/秀峰.jpg">
 <title>桂林市公安局秀峰分局反诈中心-沉浸式反诈体验 | 刷单返利诈骗</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -300,7 +301,6 @@
   .mcard .cap { position:absolute; left:9px; bottom:7px; z-index:3; font-size:9px; color:rgba(255,255,255,.85); text-shadow:0 1px 4px rgba(0,0,0,.6); }
   .mcard .mimg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; }
   .mcard .play-badge { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.55); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; padding-left:2px; }
-  .mcard .ai-tag { position:absolute; top:6px; left:6px; z-index:3; font-size:8px; padding:2px 6px; border-radius:8px; background:rgba(0,0,0,.45); color:rgba(255,255,255,.82); letter-spacing:.3px; }
 
   /* ===== 好友名片 ===== */
   .contact-card { width:86%; margin:2px auto; background:#fff; border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px; box-shadow:0 2px 10px rgba(0,0,0,.07); }
@@ -444,7 +444,6 @@
     <div class="meta">全程模拟<br>人物与平台均虚构<br>形象由 AI 生成 · 非真实人物<br>不产生任何真实资金往来</div>
     <div class="note">📌 说明：本作品仅用于反诈宣传。网页、APP、聊天记录均为虚构；画面不展示任何真实或露骨内容；「约爱」「上门」「返利」等字眼是诈骗分子的引流话术，不代表任何真实服务。</div>
     <div class="wcopy">版权所有：桂林市公安局秀峰分局</div>
-	<div class="wcopy">创作人：高天祥、吴雨轩</div>
     <div class="fixed-cta"><button onclick="startSim()">开始体验</button></div>
   </section>
 
@@ -662,6 +661,14 @@ var GIRL_ALL = [];
   }
 })();
 function girlPhoto(file){ return "照片/girl/" + file; }
+/* 首屏渲染完成后预热全部人像，避免切换场景时图片才发起请求 */
+window.addEventListener("load", function(){
+  for (var i = 0; i < GIRL_ALL.length; i++){
+    var im = new Image();
+    im.decoding = "async";
+    im.src = girlPhoto(GIRL_ALL[i]);
+  }
+});
 function girlFileFor(type){
   var list = (type && GIRL_SETS[type]) ? GIRL_SETS[type] : GIRL_ALL;
   return list[rnd(0, list.length - 1)];
@@ -677,7 +684,7 @@ function fillWebTiles(){
     used.push(f);
     var d = document.createElement("div");
     d.className = "web-tile";
-    d.innerHTML = "<img loading='lazy' src='" + girlPhoto(f) + "' alt='AI生成虚构人像，非真实人物'><div class='wt-tag'>附近在线</div>";
+    d.innerHTML = "<img loading='eager' decoding='async' fetchpriority='high' src='" + girlPhoto(f) + "' alt='AI生成虚构人像，非真实人物'><div class='wt-tag'>附近在线</div>";
     box.appendChild(d);
   }
 }
@@ -1054,7 +1061,6 @@ function mediaCard(kind, cap){
   var f = girlFileFor();
   var inner = "<div class='mcard" + (kind === "video" ? " video" : "") + "'>" +
     "<img class='mimg' src='" + girlPhoto(f) + "' alt='AI生成虚构人像，非真实人物'>" +
-    "<div class='ai-tag'>AI 人像 · 虚构</div>" +
     (kind === "video" ? "<div class='play-badge'>▶</div>" : "") +
     (cap ? "<div class='cap'>" + cap + "</div>" : "") + "</div>";
   row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div>" + inner;
@@ -1259,7 +1265,7 @@ function renderGirlGrid(t){
       var scene = p[2] || "在线";
       var cell = document.createElement("div");
       cell.className = "gcell";
-      cell.innerHTML = "<img loading='lazy' src='照片/girl/" + file + "' alt='AI生成虚构人像，非真实人物'><div class='gname2'>" + nm + "<small>" + scene + " · 在线</small></div>";
+      cell.innerHTML = "<img loading='eager' decoding='async' src='照片/girl/" + file + "' alt='AI生成虚构人像，非真实人物'><div class='gname2'>" + nm + "<small>" + scene + " · 在线</small></div>";
       cell.onclick = function(){ pickGirl(t, file); };
       grid.appendChild(cell);
     })(files[j]);
