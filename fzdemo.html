@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0C0914">
 <link rel="preload" as="image" href="照片/logo/秀峰.jpg">
-<title>桂林市公安局秀峰分局反诈中心-沉浸式反诈体验 | 刷单返利诈骗</title>
+<link rel="icon" type="image/jpeg" href="照片/logo/秀峰.jpg">
+<link rel="apple-touch-icon" href="照片/logo/秀峰.jpg">
+<title>桂林市公安局秀峰分局反诈中心-沉浸式反诈体验</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html, body { height:100%; }
@@ -169,6 +171,8 @@
   .tk-label { font-size:11px; letter-spacing:3px; color:#7E9BC9; }
   .tk-balance { font-size:34px; font-weight:800; color:#63D7E8; margin:7px 0 3px; text-shadow:0 0 20px rgba(99,215,232,.3); }
   .tk-sub { font-size:11px; color:#7E9BC9; }
+  .tk-withdraw { display:block; width:100%; margin:13px 0 4px; padding:12px; border:none; border-radius:10px; background:#07C160; color:#fff; font-size:15px; font-weight:700; letter-spacing:2px; cursor:pointer; }
+  .tk-withdraw:disabled { background:rgba(255,255,255,.07); color:#66799C; cursor:default; }
   .task-list { padding-bottom:12px; }
   .task-item { margin:0 16px 12px; padding:14px 16px; border-radius:14px; background:rgba(255,255,255,.045); border:1px solid rgba(120,170,255,.13); }
   .task-item.done { opacity:.55; }
@@ -298,7 +302,6 @@
   .mcard .lock b { font-size:15px; font-weight:700; letter-spacing:1px; }
   .mcard .lock small { font-size:8.5px; color:rgba(255,255,255,.5); }
   .mcard .picon { width:34px; height:34px; margin-bottom:2px; border-radius:50%; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff; }
-  .mcard .cap { position:absolute; left:9px; bottom:7px; z-index:3; font-size:9px; color:rgba(255,255,255,.85); text-shadow:0 1px 4px rgba(0,0,0,.6); }
   .mcard .mimg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; }
   .mcard .play-badge { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.55); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; padding-left:2px; }
 
@@ -406,6 +409,10 @@
   .wx-btn { display:block; width:calc(100% - 36px); margin:26px auto 0; border:none; border-radius:10px; padding:14px; font-size:15.5px; font-weight:600; color:#fff; background:#07C160; cursor:pointer; }
   .wx-note { margin-top:14px; text-align:center; font-size:10.5px; color:#AAA; }
 
+  /* ===== 微信风格支付成功页 ===== */
+  .payshot { position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; z-index:300; background:#F5F5F7; overflow-y:auto; }
+  .ps-status { display:flex; justify-content:space-between; align-items:center; padding:5px 18px; background:#fff; font-size:11px; color:#333; letter-spacing:.5px; }
+
   /* ===== 会员选人相册 ===== */
   .girls-bg { background:radial-gradient(ellipse 90% 55% at 50% 0%, #3A1230 0%, transparent 62%), linear-gradient(180deg,#150A1C 0%,#08050C 100%); color:#fff; padding-bottom:24px; }
   .girls-bg .bar { background:transparent; height:42px; }
@@ -496,6 +503,7 @@
     <div class="task-head">
       <div class="tk-label">可提现余额</div>
       <div class="tk-balance" id="taskBal">¥0.00</div>
+      <button class="tk-withdraw" id="tkWithdraw" onclick="withdrawAllTasks()" disabled>提现</button>
       <div class="tk-sub">完成任务 · 本金佣金一并返还</div>
     </div>
     <div class="task-list" id="taskList"></div>
@@ -574,6 +582,25 @@
   </div>
 </div>
 <div class="okmask hidden" id="okMask"><div class="c" id="okIcon">✓</div><div class="t" id="okText">支付成功</div><div class="oksub" id="okSub"></div></div>
+<div class="payshot hidden" id="payOk">
+  <div class="ps-status"><span>01:14</span><span>📶 🔋 86%</span></div>
+  <div class="wx-bar"><span class="wx-back">‹</span>微信支付<span class="wx-more">···</span></div>
+  <div class="wx-panel">
+    <div class="wx-check">✓</div>
+    <div class="wx-title">支付成功</div>
+    <div class="wx-amt" id="okAmt">¥0.00</div>
+    <div class="wx-sub">已支付</div>
+  </div>
+  <div class="wx-rows">
+    <div class="wx-row"><span>付款方式</span><b>零钱</b></div>
+    <div class="wx-row"><span>收款方</span><b id="okName">—</b></div>
+    <div class="wx-row"><span>转账说明</span><b id="okMemo">—</b></div>
+    <div class="wx-row"><span>支付时间</span><b id="okTime">—</b></div>
+    <div class="wx-row"><span>交易单号</span><b id="okNo">—</b></div>
+  </div>
+  <button class="wx-btn" id="okBtn">完成</button>
+  <div class="wx-note">模拟支付 · 不会产生任何真实资金往来</div>
+</div>
 <div class="toast" id="toast"></div>
 <div class="sc-mask" id="scMask"></div>
 
@@ -1055,14 +1082,12 @@ function sysMsg(text){
   CHATBOX.appendChild(d);
   scrollBottom();
 }
-function mediaCard(kind, cap){
+function mediaCard(kind){
   var row = document.createElement("div");
   row.className = "msg them";
   var f = girlFileFor();
-  var inner = "<div class='mcard" + (kind === "video" ? " video" : "") + "'>" +
-    "<img class='mimg' src='" + girlPhoto(f) + "' alt='AI生成虚构人像，非真实人物'>" +
-    (kind === "video" ? "<div class='play-badge'>▶</div>" : "") +
-    (cap ? "<div class='cap'>" + cap + "</div>" : "") + "</div>";
+  var inner = "<div class='mcard'><img class='mimg' src='" + girlPhoto(f) + "' alt='聊天图片'>" +
+    (kind === "video" ? "<div class='play-badge'>▶</div>" : "") + "</div>";
   row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div>" + inner;
   CHATBOX.appendChild(row);
   scrollBottom();
@@ -1121,6 +1146,28 @@ function showOk(text, bad, sub){
   $("okMask").classList.toggle("bad", !!bad);
   $("okMask").classList.remove("hidden");
 }
+function showPaySuccess(cfg, done){
+  var d = new Date();
+  $("okAmt").textContent = fmt(cfg.amount);
+  $("okName").textContent = cfg.name || "个人收款";
+  $("okMemo").textContent = cfg.memo || "转账";
+  $("okTime").textContent = "今天 " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+  $("okNo").textContent = "2026" + pad(d.getMonth() + 1) + pad(d.getDate()) + "22" + String(rnd(100000000, 999999999));
+  var box = $("payOk");
+  box.classList.remove("hidden");
+  box.scrollTop = 0;
+  var closed = false;
+  function close(){
+    if (closed) return;
+    closed = true;
+    clearTimeout(timer);
+    box.classList.add("hidden");
+    unlock();
+    done && done();
+  }
+  $("okBtn").onclick = close;
+  var timer = setTimeout(close, 3600);
+}
 function payModal(cfg, done){
   $("payName").textContent = cfg.name || "付款方";
   $("payAmt").textContent = fmt(cfg.amount);
@@ -1144,12 +1191,7 @@ function payModal(cfg, done){
         }, 1700);
       } else {
         ST.paid += cfg.amount;
-        showOk("支付成功");
-        setTimeout(function(){
-          $("okMask").classList.add("hidden");
-          unlock();
-          done && done();
-        }, 900);
+        showPaySuccess(cfg, done);
       }
     }, 900);
   };
@@ -1173,10 +1215,10 @@ function startMimmin(){
     {w:"time",t:"凌晨 1:14 · 通过「同城速约」添加"},
     {w:"them",t:"哥哥你好呀～我是爱经纪人-敏敏，很高兴为你服务😘"},
     {w:"them",t:"我们是同城真人约爱平台，附近的小姐姐都能安排上门，不满意包退"},
-    {fn:function(){ mediaCard("img","敏敏 发来一张图片"); }},
-    {fn:function(){ mediaCard("img","敏敏 发来一张图片"); }},
+    {fn:function(){ mediaCard("img"); }},
+    {fn:function(){ mediaCard("img"); }},
     {w:"them",t:"今天新用户专享活动：充值 99 元开通会员，附近所有小姐姐都可以看"},
-    {fn:function(){ mediaCard("video","敏敏 发来一段视频"); }},
+    {fn:function(){ mediaCard("video"); }},
     {w:"them",t:"会员还能解锁「认证任务」，完成一单返一单，很多哥哥都在做"},
     {w:"me",t:"真的能约到吗？"},
     {w:"them",t:"当然啦，小姐姐都是实名认证的，会员优先派单"},
@@ -1347,9 +1389,8 @@ function renderTasks(){
         b.textContent = "已完成";
         b.disabled = true;
       } else if (paid){
-        b.innerHTML = "<span class='guide-arrow'>👉</span>提现 " + fmt(it.ret);
-        b.className = "ti-btn btn-shake";
-        b.onclick = function(){ withdrawTask(it); };
+        b.textContent = "已到账";
+        b.disabled = true;
       } else {
         b.innerHTML = locked ? "未解锁" : "<span class='guide-arrow'>👉</span>" + (it.id === "t3" ? "领取联单任务" : "领取任务");
         b.disabled = locked;
@@ -1365,16 +1406,20 @@ function renderTasks(){
     })(items[i]);
   }
   var foot = $("taskFoot"); if (foot) foot.innerHTML = "";
+  var wb = $("tkWithdraw"); if (wb) wb.disabled = ST.bal <= 0;
 }
-function withdrawTask(it){
-  if (ACT_LOCK || ST.flags["w_" + it.id]) return;
+function withdrawAllTasks(){
+  if (ACT_LOCK || ST.bal <= 0) return;
   lock();
-  ST.flags["w_" + it.id] = true;
-  ST.back += it.ret;
-  ST.bal -= it.ret;
-  if (ST.bal < 0) ST.bal = 0;
+  var items = taskItems();
+  for (var i = 0; i < items.length; i++){
+    if (ST.flags["p_" + items[i].id]) ST.flags["w_" + items[i].id] = true;
+  }
+  var amt = ST.bal;
+  ST.back += amt;
+  ST.bal = 0;
   var d = new Date();
-  $("wdAmt").textContent = fmt(it.ret);
+  $("wdAmt").textContent = fmt(amt);
   $("wdTime").textContent = "今天 " + pad(d.getHours()) + ":" + pad(d.getMinutes());
   $("wdNo").textContent = "2026" + pad(d.getMonth() + 1) + pad(d.getDate()) + String(rnd(100000, 999999));
   updateTaskBal();
