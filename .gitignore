@@ -1,0 +1,4 @@
+.claude/
+.wrangler/
+cloudflare-dist/
+*.bak
