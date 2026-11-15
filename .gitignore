@@ -2,3 +2,7 @@
 .wrangler/
 cloudflare-dist/
 *.bak
+stats-server/data/
+stats-server/backups/
+stats-server/.demo/
+stats-server/.env

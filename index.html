@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050A12">
+<link rel="preload" as="image" href="照片/logo/秀峰.jpg">
+<link rel="icon" type="image/jpeg" href="照片/logo/秀峰.jpg">
+<link rel="apple-touch-icon" href="照片/logo/秀峰.jpg">
+<title>秀峰反诈剧场 · 桂林市公安局秀峰分局</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { min-height:100%; }
+  body {
+    font-family:"PingFang SC","HarmonyOS Sans SC","MiSans","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#05080F; color:#EAF0FA;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif { font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif; }
+  button { font-family:inherit; cursor:pointer; }
+  .hidden { display:none !important; }
+
+  /* ============ 共通外壳 ============ */
+  .app {
+    position:relative; max-width:480px; margin:0 auto; min-height:100vh;
+    display:flex; flex-direction:column; overflow:hidden;
+    background:
+      radial-gradient(ellipse 100% 46% at 50% -6%, rgba(34,78,140,.52) 0%, transparent 62%),
+      radial-gradient(ellipse 76% 42% at 84% 74%, rgba(190,150,70,.13) 0%, transparent 62%),
+      linear-gradient(178deg,#050A12 0%,#0A1526 38%,#0D1B2E 64%,#060B14 100%);
+  }
+  .app::before {
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(140,185,255,.055) 1px, transparent 1px);
+    background-size:24px 24px;
+    mask-image:linear-gradient(180deg,#000 0%,transparent 68%);
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 68%);
+  }
+
+  #home {
+    height:100vh; height:100dvh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:44px 26px 148px;
+  }
+
+  /* ============ 顶部 ============ */
+  .top { position:relative; z-index:3; display:flex; align-items:center; gap:11px; padding:24px 22px 0; }
+  .top img { width:38px; height:38px; border-radius:50%; object-fit:cover; flex:0 0 38px;
+    box-shadow:0 0 0 1.5px rgba(140,185,255,.34), 0 6px 18px rgba(0,0,0,.5); }
+  .top-txt { line-height:1.45; }
+  .top-name { font-size:13px; font-weight:700; letter-spacing:.8px; color:#DCE8FA; }
+
+  /* ============ 首页：与剧场开场页同构 ============ */
+  .logo-head { position:relative; display:flex; flex-direction:column; align-items:center; gap:9px; margin-bottom:20px; }
+  .logo-img { width:62px; height:62px; border-radius:50%; object-fit:cover;
+    box-shadow:0 0 0 2px rgba(120,170,255,.3), 0 8px 26px rgba(0,0,0,.5); }
+  .logo-txt { max-width:320px; font-size:15.5px; font-weight:800; letter-spacing:1.5px; line-height:1.5;
+    background:linear-gradient(92deg,#9EC5FF,#fff 45%,#7FB0FF);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .ep { position:relative; font-size:11.5px; letter-spacing:5px; color:#7FA6E0; margin-bottom:20px; text-indent:5px; }
+  .ep::before, .ep::after { content:""; display:inline-block; width:24px; height:1px;
+    background:linear-gradient(90deg,transparent,#7FA6E0); vertical-align:middle; margin:0 10px; }
+  .ep::after { background:linear-gradient(90deg,#7FA6E0,transparent); }
+  #home h1 { position:relative; font-size:27px; font-weight:700; line-height:1.65; letter-spacing:1px; color:#F2F7FF; }
+  #home h1 .kq { color:#F4D89A; text-shadow:0 0 24px rgba(232,200,122,.35); }
+  .rule { position:relative; width:46px; height:2px; margin:20px 0;
+    background:linear-gradient(90deg,transparent,#5B8AD6,transparent); }
+  #home p { position:relative; font-size:14px; line-height:2; color:rgba(236,242,250,.78); }
+  #home .meta { position:relative; margin-top:24px; font-size:11px; line-height:1.9;
+    letter-spacing:1px; color:rgba(236,242,250,.48); }
+  #home .note { position:relative; margin-top:16px; max-width:344px; font-size:10.5px; line-height:1.75;
+    color:rgba(236,242,250,.44); border:1px solid rgba(255,255,255,.09);
+    border-radius:10px; padding:10px 12px; text-align:left; }
+  #home .wcopy { position:relative; margin-top:14px; font-size:10px; letter-spacing:1px; color:rgba(236,242,250,.3); }
+
+  .fixed-cta { position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
+    z-index:90; padding:18px 24px calc(18px + env(safe-area-inset-bottom));
+    background:linear-gradient(transparent, rgba(5,10,18,.94) 38%); }
+  .fixed-cta button { width:100%; border:none; border-radius:14px; padding:15px; font-size:16px; font-weight:700;
+    letter-spacing:3px; color:#1A1305; background:linear-gradient(135deg,#F6DFA8,#D8B265 55%,#C39A47);
+    box-shadow:0 12px 30px rgba(190,150,60,.35); transition:transform .16s ease; }
+  .fixed-cta button:active { transform:scale(.985); }
+
+  /* ============ 底部风景（暂隐藏，恢复时去掉 display:none） ============ */
+  .art-wrap {
+    position:relative; z-index:2; display:none; height:45vh; min-height:180px; max-height:420px; overflow:hidden;
+    line-height:0;
+  }
+  .art { display:block; width:100%; height:100%; }
+
+  /* ============ 入场动画 ============ */
+  .rise { opacity:0; transform:translateY(14px); animation:rise .72s cubic-bezier(.22,.7,.3,1) forwards; }
+  @keyframes rise { to { opacity:1; transform:none; } }
+  .d1 { animation-delay:.06s; } .d2 { animation-delay:.16s; }
+  .d3 { animation-delay:.28s; } .d4 { animation-delay:.4s; }
+  .d5 { animation-delay:.52s; }
+
+  #home.out { animation:sceneOut .36s ease forwards; }
+  @keyframes sceneOut { to { opacity:0; transform:scale(.985); } }
+
+  /* ============ 选择页 ============ */
+  #pick { padding-bottom:0; }
+  .pick-head { position:relative; z-index:3; padding:34px 26px 0; }
+  .pick-head h2 { font-size:25px; font-weight:700; letter-spacing:1.5px; line-height:1.5; color:#F2F7FF; }
+  .pick-head .sub { margin-top:10px; font-size:12.5px; line-height:1.85; color:rgba(214,228,247,.6); }
+  .pick-list { position:relative; z-index:3; flex:0 0 auto; padding:26px 20px 0; display:flex; flex-direction:column; gap:13px; }
+
+  .theater {
+    position:relative; display:flex; align-items:center; gap:14px;
+    padding:17px 16px; border-radius:17px; text-decoration:none; overflow:hidden;
+    background:linear-gradient(150deg,rgba(255,255,255,.062),rgba(255,255,255,.018));
+    border:1px solid rgba(255,255,255,.09);
+    transition:transform .16s ease, border-color .16s ease, background .16s ease;
+  }
+  .theater::before {
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--c); opacity:.85;
+  }
+  .theater::after {
+    content:""; position:absolute; right:-40px; top:-40px; width:130px; height:130px; border-radius:50%;
+    background:var(--c); opacity:.08; filter:blur(24px); pointer-events:none;
+  }
+  .theater:active { transform:scale(.982); border-color:rgba(255,255,255,.2); }
+
+  .t-glyph {
+    flex:0 0 46px; width:46px; height:46px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center; font-size:21px;
+    background:color-mix(in srgb, var(--c) 22%, transparent);
+    border:1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  }
+  .t-main { flex:1 1 auto; min-width:0; }
+  .t-title { display:block; font-size:16px; font-weight:700; letter-spacing:.8px; color:#EDF3FC; }
+  .t-desc { display:block; margin-top:5px; font-size:11.5px; line-height:1.6; color:rgba(206,221,241,.56); }
+  .t-meta { display:block; margin-top:7px; font-size:9.5px; letter-spacing:1.1px; color:color-mix(in srgb, var(--c) 78%, #9FB4CF); }
+  .t-go { flex:0 0 auto; font-size:20px; line-height:1; color:rgba(255,255,255,.24); padding-right:2px; }
+
+  .back {
+    position:relative; z-index:3; margin:auto 20px calc(20px + env(safe-area-inset-bottom));
+    border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
+    border-radius:14px; padding:13px; font-size:13.5px; font-weight:600; letter-spacing:1px;
+    color:rgba(214,228,247,.72);
+  }
+  .back:active { background:rgba(255,255,255,.08); }
+  .pick-note {
+    position:relative; z-index:3; margin-top:28px; text-align:center; padding:0 30px 16px;
+    font-size:9.5px; line-height:1.85; letter-spacing:.6px; color:rgba(214,228,247,.3);
+  }
+
+  /* ============ 矮屏紧凑排版 ============ */
+  @media (max-height:730px) {
+    #home { padding:26px 22px 130px; }
+    .logo-head { margin-bottom:14px; gap:7px; }
+    .logo-img { width:54px; height:54px; }
+    .logo-txt { font-size:14.5px; }
+    .ep { margin-bottom:14px; font-size:10.5px; letter-spacing:4px; }
+    #home h1 { font-size:24px; }
+    .rule { margin:15px 0; }
+    #home p { font-size:13px; line-height:1.85; }
+    #home .meta { margin-top:18px; font-size:10.5px; }
+    #home .note { margin-top:12px; font-size:10px; padding:9px 11px; }
+    #home .wcopy { margin-top:10px; }
+    .fixed-cta { padding:14px 22px calc(14px + env(safe-area-inset-bottom)); }
+    .fixed-cta button { padding:13px; font-size:15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 首页 ==================== -->
+<section class="app" id="home">
+  <div class="logo-head rise d1">
+    <img class="logo-img" src="照片/logo/秀峰.jpg" alt="桂林市公安局秀峰分局">
+    <div class="logo-txt">桂林市公安局秀峰分局反诈中心</div>
+  </div>
+  <div class="ep rise d2">沉浸式反诈体验</div>
+  <h1 class="rise d2">秀峰分局邀请您<br><span class="kq">体验反诈剧场</span></h1>
+  <div class="rule rise d3"></div>
+  <p class="rise d3">三幕改编自真实案例的沉浸式推演<br>冒充公检法 · 投资理财 · 约炮招嫖<br>这一次，由你决定骗局走向哪里</p>
+  <div class="meta rise d4">全程模拟 · 人物与案件均虚构<br>不产生任何真实资金往来</div>
+  <div class="note rise d5">📌 说明：本作品仅用于反诈宣传。剧场中的人物、平台、聊天记录均为虚构；真实的公安机关不会通过 QQ、微信、视频会议办案，也不存在任何「安全账户」。</div>
+
+  <div class="art-wrap rise d5">
+    <svg class="art" viewBox="0 0 375 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="waterG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#13253D"/>
+          <stop offset="1" stop-color="#050A12"/>
+        </linearGradient>
+        <filter id="blur3"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="lampGlow">
+          <feGaussianBlur stdDeviation="2.4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- 星空 -->
+      <g fill="#CFE2FF">
+        <circle cx="30" cy="72" r="1" opacity=".55"/>
+        <circle cx="62" cy="112" r=".8" opacity=".32"/>
+        <circle cx="96" cy="88" r=".9" opacity=".42"/>
+        <circle cx="124" cy="56" r="1.1" opacity=".5"/>
+        <circle cx="158" cy="98" r=".7" opacity=".3"/>
+        <circle cx="182" cy="70" r=".9" opacity=".38"/>
+        <circle cx="206" cy="120" r="1" opacity=".46"/>
+        <circle cx="238" cy="82" r=".8" opacity=".34"/>
+        <circle cx="262" cy="132" r=".7" opacity=".28"/>
+        <circle cx="286" cy="60" r="1.2" opacity=".52"/>
+        <circle cx="312" cy="102" r=".8" opacity=".36"/>
+        <circle cx="338" cy="76" r="1" opacity=".44"/>
+        <circle cx="356" cy="126" r=".7" opacity=".3"/>
+        <circle cx="146" cy="134" r=".8" opacity=".26"/>
+        <circle cx="222" cy="46" r=".7" opacity=".3"/>
+      </g>
+
+      <!-- 月亮 -->
+      <g>
+        <circle cx="290" cy="120" r="36" fill="#E8C87A" opacity=".055" filter="url(#blur3)"/>
+        <circle cx="290" cy="120" r="21" fill="#F5DFA8" opacity=".09" filter="url(#blur3)"/>
+        <circle cx="290" cy="120" r="11.5" fill="#F8E9C4" opacity=".92"/>
+        <circle cx="286" cy="117" r="2.1" fill="#E4CF9C" opacity=".32"/>
+        <circle cx="294" cy="124" r="1.7" fill="#E4CF9C" opacity=".26"/>
+      </g>
+      <!-- 薄云 -->
+      <g fill="#8FB0DC" opacity=".07">
+        <ellipse cx="118" cy="108" rx="48" ry="5"/>
+        <ellipse cx="248" cy="96" rx="36" ry="4"/>
+        <ellipse cx="330" cy="134" rx="42" ry="4.5"/>
+        <ellipse cx="70" cy="128" rx="34" ry="3.5"/>
+      </g>
+
+      <!-- 远山 -->
+      <path d="M0,196 Q22,164 44,196 Q66,140 90,196 Q112,168 134,196 Q156,150 180,196
+               Q202,170 224,196 Q246,144 270,196 Q292,166 314,196 Q336,152 360,196
+               L375,196 L375,220 L0,220 Z"
+            fill="#0A1626" opacity=".85"/>
+      <!-- 近山 -->
+      <path d="M0,210 Q26,182 52,210 Q76,164 104,210 Q130,186 156,210 Q182,172 210,210
+               Q236,188 262,210 Q288,176 316,210 Q342,190 375,210
+               L375,228 L0,228 Z"
+            fill="#0D1B2E"/>
+
+      <!-- ========== 逍遥楼（二层三檐） ========== -->
+      <g id="xiaoyaoBase" transform="translate(100,232)">
+        <!-- 台基 -->
+        <path d="M-37,0 L37,0 L34,-9 L-34,-9 Z" fill="#16283F"/>
+        <rect x="-31" y="-13" width="62" height="4" fill="#1E3552"/>
+        <!-- 一层 -->
+        <rect x="-26" y="-40" width="52" height="27" fill="#122238"/>
+        <g fill="#1B3350">
+          <rect x="-26" y="-40" width="1.8" height="27"/>
+          <rect x="-9" y="-40" width="1.8" height="27"/>
+          <rect x="7.2" y="-40" width="1.8" height="27"/>
+          <rect x="24.2" y="-40" width="1.8" height="27"/>
+        </g>
+        <g fill="#F0C468" opacity=".9">
+          <rect x="-20" y="-36" width="8.5" height="15" rx="1"/>
+          <rect x="-5" y="-36" width="8.5" height="15" rx="1"/>
+          <rect x="11" y="-36" width="8.5" height="15" rx="1"/>
+        </g>
+        <!-- 一层檐 -->
+        <path d="M-41,-32 Q-35,-43 -26,-39 L26,-39 Q35,-43 41,-32 L30,-35 L-30,-35 Z" fill="#2E5578"/>
+        <!-- 二层 -->
+        <rect x="-19" y="-56" width="38" height="14" fill="#122238"/>
+        <g fill="#F0C468" opacity=".78">
+          <rect x="-14" y="-53" width="7" height="7" rx=".8"/>
+          <rect x="-3" y="-53" width="6" height="7" rx=".8"/>
+          <rect x="7" y="-53" width="7" height="7" rx=".8"/>
+        </g>
+        <!-- 二层檐 -->
+        <path d="M-34,-50 Q-28,-60 -20,-56 L20,-56 Q28,-60 34,-50 L23,-53 L-23,-53 Z" fill="#2E5578"/>
+        <!-- 顶层 -->
+        <rect x="-12" y="-67" width="24" height="8" fill="#122238"/>
+        <!-- 顶檐 -->
+        <path d="M-27,-60 Q-22,-71 -15,-67 L15,-67 Q22,-71 27,-60 L18,-63 L-18,-63 Z" fill="#3A6890"/>
+        <!-- 宝顶 -->
+        <rect x="-1.2" y="-77" width="2.4" height="9" fill="#C9A227"/>
+        <circle cx="0" cy="-79" r="3.4" fill="#E8C87A" filter="url(#lampGlow)"/>
+      </g>
+
+      <!-- ========== 解放桥（三大弧形 · 两小弧形） ========== -->
+      <g id="jiefangBase" transform="translate(300,236)">
+        <path fill="#1B3352" fill-rule="evenodd" d="
+          M-130,-36 L130,-36 L130,4 L-130,4 Z
+          M-118,4 A 10 10 0 0 1 -98,4 Z
+          M-86,4 A 24 24 0 0 1 -38,4 Z
+          M-24,4 A 24 24 0 0 1 24,4 Z
+          M38,4 A 24 24 0 0 1 86,4 Z
+          M98,4 A 10 10 0 0 1 118,4 Z
+        "/>
+        <!-- 桥面 -->
+        <rect x="-131" y="-40" width="262" height="4" rx="1" fill="#2A4C72"/>
+        <!-- 栏杆 -->
+        <rect x="-131" y="-44" width="262" height="1.2" fill="#2F5A85" opacity=".7"/>
+        <g stroke="#2F5A85" stroke-width="1" opacity=".5">
+          <line x1="-108" y1="-44" x2="-108" y2="-40"/>
+          <line x1="-62" y1="-44" x2="-62" y2="-40"/>
+          <line x1="-16" y1="-44" x2="-16" y2="-40"/>
+          <line x1="30" y1="-44" x2="30" y2="-40"/>
+          <line x1="76" y1="-44" x2="76" y2="-40"/>
+          <line x1="122" y1="-44" x2="122" y2="-40"/>
+        </g>
+        <!-- 桥灯 -->
+        <g fill="#F0C468" filter="url(#lampGlow)">
+          <circle cx="-108" cy="-45" r="1.4"/>
+          <circle cx="-54" cy="-45" r="1.4"/>
+          <circle cx="0" cy="-45" r="1.4"/>
+          <circle cx="54" cy="-45" r="1.4"/>
+          <circle cx="108" cy="-45" r="1.4"/>
+        </g>
+      </g>
+
+      <!-- 水面 -->
+      <rect x="0" y="232" width="375" height="68" fill="url(#waterG)"/>
+      <!-- 倒影 -->
+      <use href="#xiaoyaoBase" transform="translate(0,464) scale(1,-1)" opacity=".16" filter="url(#blur3)"/>
+      <use href="#jiefangBase" transform="translate(0,472) scale(1,-1)" opacity=".12" filter="url(#blur3)"/>
+      <!-- 水波 -->
+      <g stroke="#7FB4FF" stroke-width="1" opacity=".13" stroke-linecap="round">
+        <line x1="26" y1="250" x2="98" y2="250"/>
+        <line x1="52" y1="262" x2="120" y2="262"/>
+        <line x1="180" y1="246" x2="330" y2="246"/>
+        <line x1="220" y1="258" x2="352" y2="258"/>
+        <line x1="120" y1="274" x2="232" y2="274"/>
+        <line x1="18" y1="286" x2="96" y2="286"/>
+        <line x1="268" y1="284" x2="356" y2="284"/>
+      </g>
+      <g stroke="#E8C87A" stroke-width="1" opacity=".16" stroke-linecap="round">
+        <line x1="40" y1="242" x2="74" y2="242"/>
+        <line x1="266" y1="240" x2="318" y2="240"/>
+        <line x1="34" y1="270" x2="72" y2="270"/>
+      </g>
+      <!-- 竹筏 -->
+      <g transform="translate(150,280)" opacity=".42">
+        <path d="M-16,0 Q0,3 16,0 L13,2.2 Q0,4.2 -13,2.2 Z" fill="#1B2C44"/>
+        <path d="M-7,-1 L-7,-8 M7,-1 L7,-8" stroke="#2F4A6B" stroke-width="1"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wcopy rise d5">版权所有：桂林市公安局秀峰分局</div>
+  <div class="fixed-cta"><button onclick="goSelect()">开始体验</button></div>
+</section>
+
+<!-- ==================== 剧场选择 ==================== -->
+<section class="app hidden" id="pick">
+  <header class="top rise d1">
+    <img src="照片/logo/秀峰.jpg" alt="桂林市公安局秀峰分局">
+    <div class="top-txt">
+      <div class="top-name">桂林市公安局秀峰分局反诈中心</div>
+    </div>
+  </header>
+
+  <div class="pick-head rise d2">
+    <h2 class="serif">选择你想体验的剧场</h2>
+    <div class="sub">三种高发骗局 · 每一步都由你做出选择</div>
+  </div>
+
+  <div class="pick-list">
+    <a class="theater rise d2" href="scam-police.html" style="--c:#4A8DFF">
+      <span class="t-glyph">👮</span>
+      <span class="t-main">
+        <span class="t-title">冒充公检法</span>
+        <span class="t-desc">陌生「警察」加你，说你涉嫌一起洗钱案</span>
+        <span class="t-meta">约 5 分钟 · 5 种结局</span>
+      </span>
+      <span class="t-go">›</span>
+    </a>
+
+    <a class="theater rise d3" href="scam-invest.html" style="--c:#D9B45E">
+      <span class="t-glyph">💰</span>
+      <span class="t-main">
+        <span class="t-title">投资理财</span>
+        <span class="t-desc">军官男友说有稳赚不赔的内部渠道</span>
+        <span class="t-meta">约 6 分钟 · 5 种结局</span>
+      </span>
+      <span class="t-go">›</span>
+    </a>
+
+    <a class="theater rise d4" href="scam-parttime.html" style="--c:#B978F0">
+      <span class="t-glyph">🎯</span>
+      <span class="t-main">
+        <span class="t-title">约炮招嫖</span>
+        <span class="t-desc">深夜「同城约爱」广告，点进去就有人加你</span>
+        <span class="t-meta">约 6 分钟 · 5 种结局</span>
+      </span>
+      <span class="t-go">›</span>
+    </a>
+  </div>
+
+  <div class="pick-note rise d5">本作品仅用于反诈宣传，人物、平台、聊天记录均为虚构<br>真实公安机关不会通过 QQ、微信办案，也不存在任何「安全账户」</div>
+
+  <button class="back rise d5" onclick="goHome()">返回首页</button>
+</section>
+
+<script>
+var HOME = document.getElementById("home");
+var PICK = document.getElementById("pick");
+
+function goSelect(){
+  if (HOME.classList.contains("out")) return;
+  HOME.classList.add("out");
+  setTimeout(function(){
+    HOME.classList.add("hidden");
+    HOME.classList.remove("out");
+    PICK.classList.remove("hidden");
+    window.scrollTo(0, 0);
+    replay(PICK);
+  }, 340);
+}
+
+function goHome(){
+  PICK.classList.add("hidden");
+  HOME.classList.remove("hidden");
+  window.scrollTo(0, 0);
+  replay(HOME);
+}
+
+/* 重播入场动画：移除再还原 class，强制浏览器重算 */
+function replay(root){
+  var els = root.querySelectorAll(".rise");
+  for (var i = 0; i < els.length; i++){
+    (function(el){
+      el.style.animation = "none";
+      void el.offsetWidth;
+      el.style.animation = "";
+    })(els[i]);
+  }
+}
+</script>
+</body>
+</html>

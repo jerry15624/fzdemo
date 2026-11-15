@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#150A12">
+<link rel="icon" type="image/jpeg" href="照片/logo/秀峰.jpg">
+<title>投资理财诈骗 · 沉浸式反诈体验</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { height:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif; background:#07070A; color:#222; }
+  button { font-family:inherit; }
+  .phone { max-width:480px; margin:0 auto; min-height:100vh; position:relative; background:#F2F2F6; overflow-x:hidden; }
+  .scene { min-height:100vh; position:relative; }
+  .hidden { display:none !important; }
+
+  /* ===== 开场 ===== */
+  .welcome { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:44px 26px 150px; color:#FBF1F4; overflow:hidden;
+    background:
+      radial-gradient(ellipse 95% 55% at 50% -8%, #4A1330 0%, transparent 60%),
+      radial-gradient(ellipse 70% 45% at 8% 100%, #3A1024 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 95% 80%, #4E1A20 0%, transparent 55%),
+      linear-gradient(168deg,#10070E 0%,#1C0C18 45%,#26101C 75%,#12070C 100%); }
+  .welcome::before { content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(255,190,215,.06) 1px, transparent 1px); background-size:22px 22px; }
+  .logo-head { position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:18px; }
+  .logo-img { width:62px; height:62px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px rgba(255,180,205,.35), 0 8px 26px rgba(0,0,0,.5); }
+  .logo-txt { max-width:320px; font-size:15.5px; font-weight:800; letter-spacing:1.5px; line-height:1.5; background:linear-gradient(92deg,#F5C7D6,#fff 45%,#E9A6BC); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .ep { position:relative; font-size:11.5px; letter-spacing:5px; color:#C98AA2; margin-bottom:18px; text-indent:5px; }
+  .ep::before, .ep::after { content:""; display:inline-block; width:24px; height:1px; background:linear-gradient(90deg,transparent,#C98AA2); vertical-align:middle; margin:0 10px; }
+  .ep::after { background:linear-gradient(90deg,#C98AA2,transparent); }
+  .welcome h1 { position:relative; font-size:27px; font-weight:700; line-height:1.65; letter-spacing:1px; }
+  .welcome h1 .kq { color:#FF9DBC; text-shadow:0 0 24px rgba(255,92,138,.35); }
+  .rule { position:relative; width:46px; height:2px; margin:20px 0; background:linear-gradient(90deg,transparent,#C98AA2,transparent); }
+  .welcome p { position:relative; font-size:14px; line-height:2; color:rgba(251,241,244,.8); }
+  .welcome .meta { position:relative; margin-top:24px; font-size:11px; line-height:1.9; letter-spacing:1px; color:rgba(251,241,244,.5); }
+  .welcome .note { position:relative; margin-top:16px; max-width:344px; font-size:10.5px; line-height:1.75; color:rgba(251,241,244,.45); border:1px solid rgba(255,255,255,.09); border-radius:10px; padding:10px 12px; text-align:left; }
+  .wcopy { position:relative; margin-top:14px; font-size:10px; color:rgba(251,241,244,.3); letter-spacing:1px; }
+
+  /* ===== 通用 ===== */
+  .bar { position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:center; height:46px; font-size:16px; font-weight:600; color:#fff; background:#2C2C34; }
+  .bar .sub { position:absolute; right:12px; font-size:11.5px; font-weight:400; opacity:.8; }
+  .status { display:flex; justify-content:space-between; align-items:center; padding:7px 16px 3px; font-size:10.5px; color:rgba(255,255,255,.72); letter-spacing:.5px; }
+  .online { display:inline-block; width:7px; height:7px; border-radius:50%; background:#3DDC97; margin-right:7px; vertical-align:middle; box-shadow:0 0 7px rgba(61,220,151,.8); }
+
+  .chat { padding:14px 12px 122px; display:flex; flex-direction:column; gap:12px; }
+  .msg { display:flex; align-items:flex-start; gap:8px; }
+  .msg .av { width:36px; height:36px; border-radius:9px; flex:0 0 36px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; font-weight:700; }
+  .msg .av.me-av { background:#fff; color:#666; border:1px solid #E2E2E2; font-size:12px; }
+  .msg .bb { max-width:74%; padding:10px 12px; border-radius:4px 12px 12px 12px; background:#fff; font-size:14.5px; line-height:1.62; color:#222; box-shadow:0 1px 2px rgba(0,0,0,.05); word-break:break-word; }
+  .msg.me { flex-direction:row-reverse; }
+  .msg.me .bb { border-radius:12px 4px 12px 12px; background:#95EC69; color:#111; }
+  .msg.time { justify-content:center; }
+  .msg.time .bb { background:rgba(0,0,0,.07); color:#888; font-size:11px; padding:4px 10px; border-radius:6px; box-shadow:none; }
+  .footer-bar { position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px; display:flex; flex-direction:column; gap:9px; padding:10px 14px calc(12px + env(safe-area-inset-bottom)); background:rgba(247,247,247,.97); backdrop-filter:blur(10px); border-top:1px solid #E1E1E1; z-index:60; }
+  .footer-bar button { width:100%; border:none; border-radius:12px; padding:13px 12px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  .footer-bar:empty { display:none; }
+  .b-pri { background:linear-gradient(135deg,#FF5C8A,#C4376A); color:#fff; box-shadow:0 8px 20px rgba(220,60,110,.3); }
+  .b-danger { background:linear-gradient(135deg,#FF6B5E,#D23A2E); color:#fff; box-shadow:0 8px 20px rgba(210,58,46,.3); }
+  .b-ghost { background:#fff; color:#4A5568; border:1px solid #D8DEE8 !important; }
+  .b-safe { background:linear-gradient(135deg,#25B26F,#118A50); color:#fff; box-shadow:0 8px 20px rgba(17,138,80,.28); }
+  .act-guide { display:flex; flex-direction:column; gap:8px; }
+  .guide-tip { text-align:center; font-size:11.5px; color:#B33D68; background:rgba(255,92,138,.09); border:1px dashed rgba(220,60,110,.36); border-radius:10px; padding:7px 10px; line-height:1.6; }
+  .guide-arrow { margin-right:5px; }
+  .btn-shake { animation:shakeCue 1.8s ease-in-out infinite; }
+  @keyframes shakeCue { 0%,86%,100%{transform:none} 89%{transform:translateX(-3px)} 92%{transform:translateX(3px)} 95%{transform:translateX(-2px)} 98%{transform:translateX(2px)} }
+  .imgph { width:190px; border-radius:10px; overflow:hidden; background:#EEF1F5; border:1px dashed #C9D2DE; }
+  .imgph .ph { height:118px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; color:#9AA6B6; font-size:22px; }
+  .imgph em { display:block; font-style:normal; font-size:10px; color:#9AA6B6; text-align:center; padding:0 0 7px; }
+  .voice { display:flex; align-items:center; gap:8px; min-width:130px; }
+  .voice .wave { display:flex; align-items:center; gap:2px; height:16px; }
+  .voice .wave i { width:2px; background:#8A8A93; border-radius:1px; display:block; }
+  .voice .dur { font-size:11px; color:#8A8A93; }
+
+  /* ===== 社交 App ===== */
+  .social-bg { background:linear-gradient(180deg,#1A0B15 0%,#2A1020 45%,#160812 100%); color:#F6E9EF; padding-bottom:120px; }
+  .social-bg .bar { background:transparent; height:44px; }
+  .social-brand { display:flex; align-items:center; gap:7px; font-size:18px; font-weight:800; letter-spacing:1px; }
+  .social-brand i { font-style:normal; filter:drop-shadow(0 0 8px rgba(255,92,138,.8)); }
+  .social-sub { padding:0 18px; text-align:center; font-size:11px; color:#A98A9B; margin-bottom:10px; }
+  .profile-card { margin:0 16px; border-radius:20px; padding:22px 18px; background:linear-gradient(165deg,rgba(255,255,255,.09),rgba(255,255,255,.03)); border:1px solid rgba(255,180,205,.18); box-shadow:0 20px 50px rgba(0,0,0,.4); }
+  .pc-top { display:flex; align-items:center; gap:14px; }
+  .pc-av { width:66px; height:66px; border-radius:18px; background:linear-gradient(150deg,#3E5B3A,#1E2E1C); color:#EAF2E4; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; border:1px solid rgba(255,255,255,.2); }
+  .pc-name { font-size:19px; font-weight:800; letter-spacing:.5px; }
+  .pc-meta { margin-top:5px; font-size:11.5px; color:#C9A6B5; }
+  .pc-tags { display:flex; gap:6px; margin-top:9px; flex-wrap:wrap; }
+  .pc-tag { font-size:10px; padding:3px 8px; border-radius:20px; background:rgba(255,92,138,.12); border:1px solid rgba(255,92,138,.25); color:#FFA9C3; }
+  .pc-line { margin-top:16px; padding:12px 14px; background:rgba(0,0,0,.22); border-radius:12px; font-size:13px; line-height:1.8; color:#EBD8E0; }
+  .pc-line b { color:#FFB0C7; }
+  .pc-note { margin:12px 4px 0; font-size:10.5px; color:#8F7584; line-height:1.7; }
+  .social-actions { padding:18px 16px 0; }
+  .social-actions button { display:block; width:100%; border:none; border-radius:12px; padding:13px 12px; font-size:14.5px; font-weight:600; cursor:pointer; margin-top:9px; }
+  .social-actions .b-pri { background:linear-gradient(135deg,#FF5C8A,#C4376A); color:#fff; box-shadow:0 8px 20px rgba(220,60,110,.3); }
+  .social-actions .b-ghost { background:rgba(255,255,255,.08); color:#F3DCE6; border:1px solid rgba(255,180,205,.28) !important; }
+  .social-actions .b-safe { background:linear-gradient(135deg,#25B26F,#118A50); color:#fff; }
+
+  /* ===== 微信聊天 ===== */
+  .chat-bg { background:#EDEDED; }
+  .wx-status { display:flex; justify-content:space-between; align-items:center; padding:7px 16px 3px; font-size:10.5px; color:#fff; background:#3C3C46; letter-spacing:.5px; }
+  .wx-bar { background:#3C3C46; }
+  .wx-bar .sub { font-size:10.5px; color:#8AD9AE; }
+  .chat-bg .msg .av { background:linear-gradient(150deg,#3E5B3A,#1E2E1C); }
+  .sms-card { align-self:center; width:88%; background:#fff; border-radius:12px; padding:12px 14px; font-size:12px; line-height:1.75; color:#444; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .sms-top { font-size:10px; color:#999; margin-bottom:6px; }
+
+  /* ===== 畅聊 App ===== */
+  .priv-bg { background:linear-gradient(180deg,#060F0E 0%,#0A1A18 50%,#050B0A 100%); }
+  .priv-status { display:flex; justify-content:space-between; align-items:center; padding:7px 16px 3px; font-size:10.5px; color:rgba(200,255,235,.6); letter-spacing:.5px; }
+  .priv-bar { background:#0D2421; color:#D8FFF2; }
+  .priv-bar .sub { font-size:10px; color:#63D7E8; }
+  .priv-tip { margin:10px 14px 0; padding:8px 12px; border-radius:9px; background:rgba(99,215,232,.07); border:1px solid rgba(99,215,232,.16); font-size:10.5px; color:#78B9B0; line-height:1.6; text-align:center; }
+  .priv-bg .msg .av { background:linear-gradient(150deg,#1F5A4E,#0B2923); color:#BFF3E5; }
+  .priv-bg .msg .bb { background:#122B27; color:#DDF5EE; border:1px solid rgba(99,215,232,.08); }
+  .priv-bg .msg.me .bb { background:#1C4A40; color:#E9FFF8; }
+  .priv-bg .msg.time .bb { background:rgba(255,255,255,.05); color:#6E938C; }
+  .priv-bg .imgph { background:#0E211E; border-color:rgba(99,215,232,.2); }
+  .priv-bg .imgph .ph, .priv-bg .imgph em { color:#5E8882; }
+  .priv-bg .voice .wave i { background:#6E938C; }
+  .priv-bg .voice .dur { color:#6E938C; }
+  .priv-bg .footer-bar { background:rgba(5,11,10,.97); border-top:1px solid rgba(99,215,232,.14); }
+  .link-card { background:#0F2320; border:1px solid rgba(99,215,232,.22); border-radius:12px; padding:13px 14px; width:236px; }
+  .link-title { display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700; color:#D9FFF4; }
+  .link-title span { width:30px; height:30px; border-radius:8px; background:linear-gradient(150deg,#C9A227,#7A5E10); display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .link-sub { margin-top:8px; font-size:11px; color:#6E938C; line-height:1.6; }
+  .link-btn { margin-top:10px; text-align:center; padding:8px; border-radius:8px; background:rgba(99,215,232,.12); color:#8FE6F2; font-size:12.5px; font-weight:600; cursor:pointer; }
+
+  /* ===== 投资平台 ===== */
+  .pf-bg { background:linear-gradient(180deg,#0A0E1A 0%,#101827 45%,#080B12 100%); color:#E8EEF8; padding-bottom:120px; }
+  .pf-status { display:flex; justify-content:space-between; align-items:center; padding:7px 16px 3px; font-size:10.5px; color:rgba(220,230,245,.6); letter-spacing:.5px; }
+  .pf-bar { position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between; height:46px; padding:0 16px; background:rgba(10,14,26,.94); backdrop-filter:blur(10px); border-bottom:1px solid rgba(201,162,39,.14); }
+  .pf-brand { font-size:17px; font-weight:800; letter-spacing:1px; background:linear-gradient(92deg,#F0D6A6,#fff 50%,#D9B45E); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .pf-user { font-size:10.5px; color:#8C9AB0; }
+  .pf-asset { margin:16px; border-radius:16px; padding:18px; background:linear-gradient(150deg,rgba(201,162,39,.16),rgba(30,38,55,.6)); border:1px solid rgba(201,162,39,.22); }
+  .pa-lbl { font-size:11px; color:#B9A77C; letter-spacing:1px; }
+  .pa-amt { margin-top:6px; font-size:34px; font-weight:700; letter-spacing:-.5px; color:#FFF4D8; }
+  .pa-row { display:flex; justify-content:space-between; margin-top:12px; font-size:11.5px; color:#93A2B8; }
+  .pa-row b { color:#FF6B6B; }
+  .pa-row b.up { color:#3DDC97; }
+  .pf-chart { margin:0 16px; height:116px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); position:relative; overflow:hidden; }
+  .pf-chart svg { width:100%; height:100%; display:block; }
+  .pf-chart-tag { position:absolute; left:12px; top:10px; font-size:10px; color:#8C9AB0; letter-spacing:.5px; }
+  .pf-chart-val { position:absolute; right:12px; top:10px; font-size:10.5px; color:#3DDC97; }
+  .pf-prod { margin:14px 16px 0; display:flex; flex-direction:column; gap:10px; }
+  .pp-row { display:flex; align-items:center; justify-content:space-between; padding:14px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); }
+  .pp-row b { display:block; font-size:13.5px; color:#E8EEF8; }
+  .pp-row span { display:block; margin-top:5px; font-size:10.5px; color:#8C9AB0; }
+  .pp-row em { font-style:normal; font-size:11px; padding:6px 12px; border-radius:20px; color:#1A1206; background:linear-gradient(135deg,#F0D6A6,#D9B45E); font-weight:700; }
+  .pf-log { margin:14px 16px 0; }
+  .pf-log h4 { font-size:11px; color:#8C9AB0; letter-spacing:1px; margin-bottom:8px; }
+  .log-row { display:flex; justify-content:space-between; padding:10px 0; font-size:11.5px; color:#93A2B8; border-bottom:1px dashed rgba(255,255,255,.07); }
+  .log-row b { color:#E8EEF8; font-weight:500; }
+  .log-row b.in { color:#3DDC97; }
+  .log-row b.out { color:#FF8E8E; }
+  .pf-bg .footer-bar { background:rgba(8,11,18,.97); border-top:1px solid rgba(201,162,39,.16); }
+  .pf-bg .guide-tip { color:#E0C98C; background:rgba(201,162,39,.09); border-color:rgba(201,162,39,.35); }
+
+  /* ===== 搜索提示 ===== */
+  .search-card { margin:0 16px; background:#FFFDF7; border:1px solid #EADFC2; border-radius:14px; padding:14px 16px; box-shadow:0 8px 24px rgba(60,40,10,.08); }
+  .sc-title { font-size:12px; color:#9A8B66; letter-spacing:.5px; margin-bottom:10px; }
+  .sc-item { padding:9px 0; border-bottom:1px dashed #EDE3CC; font-size:12.5px; line-height:1.65; color:#4A4230; }
+  .sc-item:last-child { border-bottom:none; }
+  .sc-item b { color:#B23A2E; }
+  .sc-item em { display:block; font-style:normal; font-size:10.5px; color:#9A8B66; margin-top:3px; }
+
+  /* ===== 支付 / 弹窗 ===== */
+  .mask { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; padding:22px; backdrop-filter:blur(2px); }
+  .pay { width:100%; max-width:340px; background:#fff; border-radius:16px; padding:22px 20px 18px; text-align:center; animation:pop .24s ease both; }
+  @keyframes pop { from { opacity:0; transform:scale(.94); } to { opacity:1; transform:none; } }
+  .pay-top { font-size:13px; color:#888; letter-spacing:2px; }
+  .pay-av { width:52px; height:52px; margin:16px auto 8px; border-radius:14px; background:linear-gradient(135deg,#C9A227,#8A6A14); color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; }
+  .pay-name { font-size:14px; color:#333; }
+  .pay-amt { margin:14px 0 4px; font-size:34px; font-weight:700; color:#111; letter-spacing:-1px; }
+  .pay-rows { margin:14px 0 18px; border-top:1px solid #EFEFEF; padding-top:12px; }
+  .pay-row { display:flex; justify-content:space-between; font-size:12.5px; color:#666; padding:5px 0; }
+  .pay-row b { color:#222; font-weight:500; }
+  .pay button { width:100%; border:none; border-radius:12px; padding:13px; font-size:15.5px; font-weight:700; color:#fff; background:linear-gradient(135deg,#E0507E,#B52C56); cursor:pointer; }
+  .pay-tip { margin-top:11px; font-size:10px; color:#AAA; line-height:1.6; }
+  .pay .ok-ico { width:56px; height:56px; margin:12px auto; border-radius:50%; background:#E9F7EF; color:#25B26F; display:flex; align-items:center; justify-content:center; font-size:28px; }
+  .pay .bad-ico { width:56px; height:56px; margin:12px auto; border-radius:50%; background:#FDEDEC; color:#D23A2E; display:flex; align-items:center; justify-content:center; font-size:28px; }
+  .pay h4 { font-size:17px; color:#222; margin-bottom:8px; }
+  .pay .ov-sub { font-size:12px; color:#888; line-height:1.7; }
+  .toast { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(.94); z-index:300; background:rgba(20,20,20,.9); color:#fff; font-size:13px; padding:12px 18px; border-radius:10px; opacity:0; pointer-events:none; transition:.2s; }
+  .toast.show { opacity:1; transform:translate(-50%,-50%) scale(1); }
+
+  /* ===== 来电 ===== */
+  .callmask { position:fixed; inset:0; z-index:260; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:30px; background:linear-gradient(170deg,#0A1220,#05080E); color:#fff; }
+  .callmask .ring { width:92px; height:92px; border-radius:50%; background:linear-gradient(160deg,#25B26F,#0F7B48); display:flex; align-items:center; justify-content:center; font-size:38px; animation:pulse 1.4s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(37,178,111,.45); } 50% { box-shadow:0 0 0 22px rgba(37,178,111,0); } }
+  .callmask .no { font-size:30px; font-weight:700; letter-spacing:2px; }
+  .callmask .st { font-size:12.5px; color:#9DB0C8; letter-spacing:1px; }
+  .callmask .btns { display:flex; gap:16px; margin-top:16px; width:100%; max-width:330px; }
+  .callmask button { flex:1; border:none; border-radius:14px; padding:14px; font-size:15px; font-weight:700; cursor:pointer; }
+  .callmask .ans { background:linear-gradient(135deg,#25B26F,#118A50); color:#fff; }
+  .callmask .hang { background:#2A3140; color:#C9D4E4; }
+
+  /* ===== 结局 ===== */
+  .result { background:radial-gradient(ellipse at 50% -10%, #42132A 0%, transparent 55%), linear-gradient(170deg,#0E070C 0%,#1A0C14 55%,#0C060A 100%); color:#F6EAEF; padding:24px 16px 160px; min-height:100vh; }
+  .result .alarm { border-radius:18px; padding:24px 18px; text-align:center; margin-bottom:16px; border:1px solid rgba(255,110,110,.25); background:linear-gradient(160deg,rgba(72,16,24,.85),rgba(26,8,12,.92)); box-shadow:0 18px 50px rgba(0,0,0,.45); }
+  .result .alarm.good { border-color:rgba(61,220,151,.28); background:linear-gradient(160deg,rgba(10,58,40,.85),rgba(6,22,16,.92)); }
+  .result .alarm.warn { border-color:rgba(232,184,107,.3); background:linear-gradient(160deg,rgba(58,40,10,.85),rgba(24,16,6,.92)); }
+  .result .alarm .alarm-logo { width:64px; height:64px; margin:0 auto 12px; padding:2px; border-radius:50%; background:#fff; object-fit:cover; display:block; box-shadow:0 10px 28px rgba(0,0,0,.45); }
+  .result .alarm h2 { font-size:22px; letter-spacing:1px; margin-bottom:10px; color:#FF9D9D; }
+  .result .alarm.good h2 { color:#7CF0BC; }
+  .result .alarm.warn h2 { color:#E8C47C; }
+  .result .alarm p { font-size:13.5px; line-height:1.85; color:rgba(255,255,255,.84); }
+  .ledger { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px; margin-bottom:14px; }
+  .ledger h3 { font-size:14px; letter-spacing:1px; margin-bottom:12px; color:#F0DCE4; }
+  .ledger .r { display:flex; justify-content:space-between; padding:7px 0; font-size:13px; color:#C0A8B4; border-bottom:1px dashed rgba(255,255,255,.07); }
+  .ledger .r span { font-weight:700; }
+  .ledger .r.out span { color:#FF9D9D; }
+  .ledger .r.in span { color:#7CF0BC; }
+  .ledger .blocked { margin-top:10px; padding:10px 12px; border-radius:9px; font-size:12px; line-height:1.7; color:#7CF0BC; background:rgba(37,178,111,.12); border:1px solid rgba(37,178,111,.25); }
+  .ledger .tip { margin-top:12px; padding-top:11px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; line-height:1.75; color:#B49AA6; }
+  .score { display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:14px 18px; margin-bottom:14px; font-size:13px; color:#F0DCE4; }
+  .score i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-left:6px; background:rgba(255,255,255,.14); }
+  .score i.on { background:#FF6E9A; box-shadow:0 0 9px rgba(255,110,154,.8); }
+  .tear { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px; margin-bottom:14px; }
+  .tear h3 { font-size:14px; letter-spacing:1px; margin-bottom:10px; color:#F0DCE4; }
+  .tear ol { list-style:none; }
+  .tear li { position:relative; padding:7px 0 7px 16px; font-size:12.5px; line-height:1.7; color:#C0A8B4; }
+  .tear li::before { content:""; position:absolute; left:0; top:15px; width:7px; height:7px; border-radius:50%; background:#E0507E; }
+  .tear li b { color:#F8E9EF; margin-right:8px; }
+  .flags { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px; margin-bottom:14px; }
+  .flags h3 { font-size:14px; letter-spacing:1px; margin-bottom:10px; color:#F0DCE4; }
+  .flags .f { padding:9px 0; font-size:12.5px; line-height:1.75; color:#C0A8B4; border-bottom:1px dashed rgba(255,255,255,.07); }
+  .flags .f:last-child { border-bottom:none; }
+  .flags .f b { color:#FFB4C2; }
+  .law { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:18px; margin-bottom:14px; }
+  .law h3 { font-size:14px; letter-spacing:1px; margin-bottom:10px; color:#F0DCE4; }
+  .law p { font-size:12.5px; line-height:1.85; color:#C0A8B4; margin-bottom:10px; }
+  .law p b { color:#FBE7EE; }
+  .result .foot { text-align:center; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:#A08593; line-height:1.9; }
+  .result .foot .hot { font-size:19px; font-weight:800; color:#5AA9FF; letter-spacing:1px; margin-bottom:6px; }
+  .result .foot .sign { margin-top:14px; font-size:11px; color:#8A6F7D; line-height:1.9; }
+  .result .foot .sign span { display:block; font-size:10px; color:#755C69; letter-spacing:1px; }
+  .fixed-cta { position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px; z-index:90; padding:18px 24px calc(18px + env(safe-area-inset-bottom)); background:linear-gradient(transparent, rgba(12,6,10,.94) 38%); }
+  .fixed-cta button { position:relative; width:100%; border:none; border-radius:14px; padding:15px; font-size:16px; font-weight:700; color:#fff; background:linear-gradient(135deg,#E0507E,#B52C56); box-shadow:0 12px 30px rgba(200,50,95,.38); cursor:pointer; animation:ctaBreathe 2.6s ease-in-out infinite; }
+  .fixed-cta button::before, .fixed-cta button::after { content:""; position:absolute; inset:0; border-radius:inherit; border:2px solid rgba(255,150,180,.72); animation:ctaRipple 2.6s ease-out infinite; pointer-events:none; }
+  .fixed-cta button::after { animation-delay:1.3s; }
+  @keyframes ctaRipple { 0%{ transform:scale(1); opacity:.75; } 70%{ opacity:0; } 100%{ transform:scale(1.55); opacity:0; } }
+  @keyframes ctaBreathe { 0%,100%{ transform:scale(1); box-shadow:0 12px 30px rgba(224,80,126,.32); } 50%{ transform:scale(1.035); box-shadow:0 14px 46px rgba(224,80,126,.62); } }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- ============ 开场 ============ -->
+  <section class="scene welcome" id="sc-welcome">
+    <div class="logo-head">
+      <img class="logo-img" alt="桂林市公安局秀峰分局" src="照片/logo/秀峰.jpg">
+      <div class="logo-txt">桂林市公安局秀峰分局反诈中心</div>
+    </div>
+    <div class="ep">沉浸式反诈体验</div>
+    <h1>投资理财诈骗<br><span class="kq">「军官男友的内部渠道」</span></h1>
+    <div class="rule"></div>
+    <p>他每天准时说早安，记得你的每一个细节。<br>他说部队有纪律，只能用一个小众软件联系。<br>后来，他说有个稳赚不赔的「内部项目」。</p>
+    <div class="meta">全程模拟 · 人物与平台均虚构<br>不产生任何真实资金往来</div>
+    <div class="note">📌 说明：本作品仅用于反诈宣传。聊天记录、人物身份、投资平台均为虚构；「内部席位」「稳赚不赔」是诈骗分子的话术，现实中不存在任何保本高收益的内部投资。</div>
+    <div class="wcopy">版权所有：桂林市公安局秀峰分局</div>
+    <div class="fixed-cta"><button onclick="startSim()">开始体验</button></div>
+  </section>
+
+  <!-- ============ 社交 App ============ -->
+  <section class="scene social-bg hidden" id="sc-social">
+    <div class="status"><span>21:47</span><span>📶 5G 🔋 65%</span></div>
+    <div class="bar"><span class="social-brand"><i>💗</i>缘遇</span><span class="sub">同城 · 附近</span></div>
+    <div class="social-sub">有人查看了你的资料，并给你发来一条私信</div>
+    <div class="profile-card">
+      <div class="pc-top">
+        <div class="pc-av">陈</div>
+        <div>
+          <div class="pc-name">陈昊 <span style="font-size:10px;color:#8FD6A9;border:1px solid rgba(61,220,151,.4);padding:1px 6px;border-radius:20px;margin-left:5px;vertical-align:middle">实名</span></div>
+          <div class="pc-meta">34 岁 · 现役军官 · 距离 3.2km</div>
+          <div class="pc-tags"><span class="pc-tag">部队服役 12 年</span><span class="pc-tag">喜欢阅读</span><span class="pc-tag">寻找结婚对象</span></div>
+        </div>
+      </div>
+      <div class="pc-line">“你好，冒昧打扰。看到你的头像，感觉你是个很温柔的人。<br>我叫陈昊，在部队服役，平时很少能接触外面的人。<br>如果打扰到你了，抱歉。”</div>
+      <div class="pc-note">⚠️ 人设越完美，越要小心。军人、高管、海外工程师，是杀猪盘最常用的身份。</div>
+    </div>
+    <div class="social-actions" id="socialActions"></div>
+  </section>
+
+  <!-- ============ 微信聊天 ============ -->
+  <section class="scene chat-bg hidden" id="sc-chat">
+    <div class="wx-status"><span>21:52</span><span>📶 5G 🔋 64%</span></div>
+    <div class="bar wx-bar"><span class="online"></span>陈昊<span class="sub">对方正在输入…</span></div>
+    <div class="chat" id="chatBox"></div>
+    <div class="footer-bar" id="chatFoot"></div>
+  </section>
+
+  <!-- ============ 畅聊 App ============ -->
+  <section class="scene priv-bg hidden" id="sc-private">
+    <div class="priv-status"><span>23:18</span><span>📶 5G 🔋 58%</span></div>
+    <div class="bar priv-bar"><span class="online"></span>陈昊<span class="sub">阅后即焚 · 端到端加密</span></div>
+    <div class="priv-tip">🔒 本聊天已开启「阅后即焚」，消息 24 小时后自动销毁</div>
+    <div class="chat" id="privBox"></div>
+    <div class="footer-bar" id="privFoot"></div>
+  </section>
+
+  <!-- ============ 投资平台 ============ -->
+  <section class="scene pf-bg hidden" id="sc-platform">
+    <div class="pf-status"><span>10:26</span><span>📶 5G 🔋 52%</span></div>
+    <div class="pf-bar"><span class="pf-brand">环球财富</span><span class="pf-user">邀请码 CH8823</span></div>
+    <div class="pf-asset">
+      <div class="pa-lbl">总资产（元）</div>
+      <div class="pa-amt" id="pfBal">0.00</div>
+      <div class="pa-row"><span>昨日收益 <b class="up" id="pfProfit">+0.00</b></span><span>累计收益 <b class="up" id="pfTotal">+0.00</b></span></div>
+    </div>
+    <div class="pf-chart">
+      <span class="pf-chart-tag">黄金 T+D · 内部席位</span>
+      <span class="pf-chart-val" id="pfChartVal">+0.00%</span>
+      <svg viewBox="0 0 320 116" preserveAspectRatio="none" id="pfSvg">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3DDC97" stop-opacity=".28"/><stop offset="1" stop-color="#3DDC97" stop-opacity="0"/></linearGradient></defs>
+        <path id="pfArea" d="" fill="url(#g1)"></path>
+        <path id="pfLine" d="" fill="none" stroke="#3DDC97" stroke-width="2" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <div class="pf-prod">
+      <div class="pp-row"><div><b>黄金 T+D · 内部席位</b><span>日化收益 3.6% · 保本保息</span></div><em>抢购</em></div>
+      <div class="pp-row"><div><b>原油期货 · 内部通道</b><span>日化收益 5.2% · 限时开放</span></div><em>抢购</em></div>
+    </div>
+    <div class="pf-log">
+      <h4>交易记录</h4>
+      <div id="pfLog"><div class="log-row"><span>暂无记录</span></div></div>
+    </div>
+    <div class="footer-bar" id="pfFoot"></div>
+  </section>
+
+  <!-- ============ 结局 ============ -->
+  <section class="scene result hidden" id="sc-result"></section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================== 基础 ==================== */
+var $ = function(id){ return document.getElementById(id); };
+var fmt = function(n){ return "¥" + Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+var money = function(n){ return Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+var ST = { paid:0, withdrawn:0, bal:0, big:0, tax:0, flags:{}, ended:false };
+var ACT_LOCK = false;
+var CHATBOX = null, FOOT = null;
+var CUR_AV = "陈", CUR_AV_BG = "#1E4A3C";
+var TYPE = 15, GAP = 420;
+
+var THEMES = {
+  chat: { av:"陈", bg:"#4A5B3E", box:"chatBox", foot:"chatFoot" },
+  priv: { av:"陈", bg:"#1F5A4E", box:"privBox", foot:"privFoot" },
+  pf:   { av:"财", bg:"#8A6A14", box:"pfFoot", foot:"pfFoot" }
+};
+function useScene(name){
+  var t = THEMES[name];
+  CHATBOX = $(t.box); FOOT = $(t.foot);
+  CUR_AV = t.av; CUR_AV_BG = t.bg;
+}
+
+/* ==================== 交互引擎 ==================== */
+function show(id){
+  var ss = document.querySelectorAll(".scene");
+  for (var i = 0; i < ss.length; i++) ss[i].classList.add("hidden");
+  $(id).classList.remove("hidden");
+  try { window.scrollTo(0,0); } catch(e){}
+}
+function toast(msg, ms){
+  var t = $("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._t);
+  t._t = setTimeout(function(){ t.classList.remove("show"); }, ms || 1500);
+}
+function scrollBottom(){ try { window.scrollTo(0, document.body.scrollHeight); } catch(e){} }
+function lock(){ ACT_LOCK = true; }
+function unlock(){ ACT_LOCK = false; }
+
+function addMsg(who, text){
+  var row = document.createElement("div");
+  row.className = "msg " + who;
+  if (who === "them"){
+    row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div><div class='bb'><span class='tx'></span></div>";
+  } else if (who === "me"){
+    row.innerHTML = "<div class='av me-av'>我</div><div class='bb'><span class='tx'></span></div>";
+  } else {
+    row.innerHTML = "<div class='bb'><span class='tx'></span></div>";
+  }
+  CHATBOX.appendChild(row);
+  return row.querySelector(".tx");
+}
+function typeText(el, html, done){
+  var plain = html.replace(/<[^>]*>/g, "");
+  var i = 0;
+  (function tick(){
+    if (i <= plain.length){
+      el.innerHTML = html.slice(0, cutPos(html, i));
+      i++; setTimeout(tick, TYPE);
+    } else { el.innerHTML = html; done && done(); }
+  })();
+}
+function cutPos(html, n){
+  var c = 0, idx = 0;
+  while (idx < html.length && c < n){
+    if (html[idx] === "<"){ while (idx < html.length && html[idx] !== ">") idx++; idx++; }
+    else { c++; idx++; }
+  }
+  return idx;
+}
+function playChat(lines, done){
+  var i = 0;
+  (function next(){
+    if (i >= lines.length){ done && done(); return; }
+    var L = lines[i++];
+    if (L.w === "time"){
+      var d = document.createElement("div");
+      d.className = "msg time";
+      d.innerHTML = "<div class='bb'>" + L.t + "</div>";
+      CHATBOX.appendChild(d); scrollBottom();
+      setTimeout(next, 900);
+    } else if (L.fn){
+      L.fn(); setTimeout(next, 260);
+    } else {
+      var el = addMsg(L.w, L.t);
+      typeText(el, L.t, function(){
+        scrollBottom();
+        setTimeout(next, GAP);
+      });
+    }
+  })();
+}
+function imgMsg(title){
+  var row = document.createElement("div");
+  row.className = "msg them";
+  row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div>" +
+    "<div class='imgph'><div class='ph'>📷</div><em>" + title + "（图片占位）</em></div>";
+  CHATBOX.appendChild(row); scrollBottom();
+}
+function voiceMsg(sec){
+  var bars = "";
+  for (var i = 0; i < 14; i++){
+    var h = 4 + Math.round(Math.random() * 12);
+    bars += "<i style='height:" + h + "px'></i>";
+  }
+  var row = document.createElement("div");
+  row.className = "msg them";
+  row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div>" +
+    "<div class='bb'><div class='voice'><div class='wave'>" + bars + "</div><span class='dur'>" + sec + "''</span></div></div>";
+  CHATBOX.appendChild(row); scrollBottom();
+}
+function linkCard(title, sub, btn, onAdd){
+  var row = document.createElement("div");
+  row.className = "msg them";
+  row.innerHTML = "<div class='av' style='background:" + CUR_AV_BG + "'>" + CUR_AV + "</div>" +
+    "<div class='link-card'><div class='link-title'><span>⬇</span>" + title + "</div><div class='link-sub'>" + sub + "</div><div class='link-btn'>" + btn + "</div></div>";
+  CHATBOX.appendChild(row); scrollBottom();
+  var b = row.querySelector(".link-btn");
+  b.onclick = function(){
+    if (b.getAttribute("data-done")) return;
+    b.setAttribute("data-done","1");
+    b.textContent = "已打开";
+    onAdd && onAdd();
+  };
+}
+function smsCard(text){
+  var d = document.createElement("div");
+  d.className = "sms-card";
+  d.innerHTML = "<div class='sms-top'>📩 银行短信 · 刚刚</div>" + text;
+  CHATBOX.appendChild(d); scrollBottom();
+}
+function searchCard(){
+  var box = document.createElement("div");
+  box.className = "search-card";
+  box.innerHTML =
+    "<div class='sc-title'>🔍 搜索：军官 网恋 投资 内部渠道</div>" +
+    "<div class='sc-item'><b>警惕！网恋对象自称军人，带你投资＝杀猪盘</b><em>国家反诈中心 · 3.2 万次浏览</em></div>" +
+    "<div class='sc-item'><b>军人不会以「内部渠道」名义拉人投资</b><em>公安部网安局 · 1.8 万次浏览</em></div>" +
+    "<div class='sc-item'><b>为什么骗子总让你下载小众聊天软件？</b><em>反诈中心 · 2.6 万次浏览</em></div>" +
+    "<div class='sc-item'><b>真实案例：她投了 80 万，平台显示盈利 240 万，提现时被要求缴税</b><em>法治日报 · 5.1 万次浏览</em></div>";
+  CHATBOX.appendChild(box); scrollBottom();
+}
+function showActions(list){
+  FOOT.innerHTML = "";
+  unlock();
+  for (var i = 0; i < list.length; i++){
+    (function(a){
+      var b = document.createElement("button");
+      b.className = (a.cls || "b-pri") + (a.guide ? " btn-shake" : "");
+      b.innerHTML = a.t;
+      b.onclick = function(){
+        if (ACT_LOCK) return;
+        lock(); FOOT.innerHTML = "";
+        a.fn();
+      };
+      if (a.guide){
+        var wrap = document.createElement("div");
+        wrap.className = "act-guide";
+        var tip = document.createElement("div");
+        tip.className = "guide-tip";
+        tip.innerHTML = "<span class='guide-arrow'>👇</span>" + (a.guideTip || "点击下方按钮继续");
+        wrap.appendChild(tip); wrap.appendChild(b);
+        FOOT.appendChild(wrap);
+      } else FOOT.appendChild(b);
+    })(list[i]);
+  }
+}
+
+/* ==================== 弹窗 ==================== */
+function overlay(html){
+  var d = document.createElement("div");
+  d.className = "mask";
+  d.id = "ovMask";
+  d.innerHTML = "<div class='pay'>" + html + "</div>";
+  document.body.appendChild(d);
+  return d;
+}
+function closeOverlay(){ var d = $("ovMask"); if (d) d.remove(); }
+
+function chargeModal(amount, onOk, opts){
+  var o = opts || {};
+  var ov = overlay(
+    "<div class='pay-top'>" + (o.top || "充值") + "</div>" +
+    "<div class='pay-av'>" + (o.av || "财") + "</div>" +
+    "<div class='pay-name'>" + (o.name || "环球财富 · 官方充值") + "</div>" +
+    "<div class='pay-amt'>" + fmt(amount) + "</div>" +
+    "<div class='pay-rows'>" +
+      "<div class='pay-row'><span>支付方式</span><b>" + (o.method || "银行卡（尾号 6612）") + "</b></div>" +
+      "<div class='pay-row'><span>到账账户</span><b>" + (o.to || "陈昊推荐 · CH8823") + "</b></div>" +
+    "</div>" +
+    "<button id='ovPay'>" + (o.btn || "确认充值") + "</button>" +
+    "<div class='pay-tip'>⚠️ 模拟操作 · 不会产生任何真实扣款</div>"
+  );
+  $("ovPay").onclick = function(){
+    this.disabled = true; this.textContent = "处理中…";
+    setTimeout(function(){
+      closeOverlay();
+      toast("✓ 充值成功（模拟）", 1200);
+      onOk && onOk();
+    }, 900);
+  };
+}
+function withdrawModal(amount, fail, onDone){
+  var ov = overlay(
+    "<div class='pay-top'>提现申请</div>" +
+    "<div class='pay-amt'>" + fmt(amount) + "</div>" +
+    "<div class='pay-rows'>" +
+      "<div class='pay-row'><span>到账账户</span><b>尾号 6612 银行卡</b></div>" +
+      "<div class='pay-row'><span>预计到账</span><b>T+1 个工作日</b></div>" +
+    "</div>" +
+    "<button id='ovWd'>提交提现</button>" +
+    "<div class='pay-tip'>模拟操作 · 不会产生任何真实资金往来</div>"
+  );
+  $("ovWd").onclick = function(){
+    this.disabled = true; this.textContent = "审核中…";
+    setTimeout(function(){
+      closeOverlay();
+      if (fail) showFailModal(fail, onDone);
+      else { toast("✓ 提现成功（模拟）"); onDone && onDone(); }
+    }, 1300);
+  };
+}
+function showFailModal(cfg, onDone){
+  var ov = overlay(
+    "<div class='bad-ico'>✕</div>" +
+    "<h4>" + cfg.title + "</h4>" +
+    "<div class='ov-sub'>" + cfg.text + "</div>" +
+    "<div style='height:14px'></div>" +
+    "<button id='ovOk'>我知道了</button>"
+  );
+  $("ovOk").onclick = function(){ closeOverlay(); onDone && onDone(); };
+}
+
+/* ==================== 平台渲染 ==================== */
+function renderChart(up){
+  var pts = [], n = 22;
+  for (var i = 0; i < n; i++){
+    var y = 88 - (i * (up ? 2.2 : 1.2)) - Math.sin(i * 1.7) * 9 - (up ? 0 : (i > 12 ? (i - 12) * 2 : 0));
+    pts.push([i * (320 / (n - 1)), Math.max(12, Math.min(104, y))]);
+  }
+  var line = "", area = "";
+  for (var j = 0; j < pts.length; j++){
+    line += (j ? " L" : "M") + pts[j][0].toFixed(1) + " " + pts[j][1].toFixed(1);
+  }
+  area = line + " L320 116 L0 116 Z";
+  var L = $("pfLine"), A = $("pfArea");
+  if (L) L.setAttribute("d", line);
+  if (A) A.setAttribute("d", area);
+}
+function renderPlatform(profit){
+  $("pfBal").textContent = money(ST.bal);
+  var pr = profit || 0;
+  $("pfProfit").textContent = (pr >= 0 ? "+" : "") + money(pr);
+  $("pfTotal").textContent = "+" + money(Math.max(0, ST.bal - ST.paid));
+  $("pfChartVal").textContent = "+" + (pr > 0 ? (pr / Math.max(ST.paid, 1) * 100).toFixed(2) : "0.00") + "%";
+  renderChart(true);
+}
+function addLog(label, amount, type){
+  var box = $("pfLog");
+  if (!box) return;
+  if (box.children.length === 1 && box.children[0].textContent.indexOf("暂无记录") >= 0) box.innerHTML = "";
+  var row = document.createElement("div");
+  row.className = "log-row";
+  row.innerHTML = "<span>" + label + "</span><b class='" + (type || "") + "'>" +
+    (type === "out" ? "-" : "+") + money(amount) + "</b>";
+  box.insertBefore(row, box.firstChild);
+}
+
+/* ==================== 开场 ==================== */
+function startSim(){
+  ST = { paid:0, withdrawn:0, bal:0, big:0, tax:0, flags:{}, ended:false };
+  ACT_LOCK = false;
+  closeOverlay();
+  var m = $("callMask"); if (m) m.remove();
+  $("chatBox").innerHTML = ""; $("chatFoot").innerHTML = "";
+  $("privBox").innerHTML = ""; $("privFoot").innerHTML = "";
+  $("pfFoot").innerHTML = ""; $("pfLog").innerHTML = "<div class='log-row'><span>暂无记录</span></div>";
+  $("sc-result").innerHTML = "";
+  show("sc-social");
+  useScene("chat");
+  greetSocial();
+}
+
+/* ==================== 第一幕：社交 App ==================== */
+function greetSocial(){
+  FOOT = $("socialActions");
+  FOOT.innerHTML = "";
+  var a1 = document.createElement("button");
+  a1.className = "b-pri btn-shake"; a1.innerHTML = "💬 回复他";
+  a1.onclick = function(){ if (ACT_LOCK) return; lock(); replySocial(); };
+  var a2 = document.createElement("button");
+  a2.className = "b-ghost"; a2.innerHTML = "🙈 忽略这条私信";
+  a2.onclick = function(){ if (ACT_LOCK) return; lock(); ignoreSocial(); };
+  FOOT.appendChild(a1); FOOT.appendChild(a2);
+}
+function ignoreSocial(){
+  toast("你划走了这条私信");
+  setTimeout(function(){
+    FOOT.innerHTML = "";
+    var tip = document.createElement("div");
+    tip.className = "guide-tip";
+    tip.innerHTML = "对方又发来一条私信：「只是想找个人说说话，不会打扰你太久。」";
+    FOOT.appendChild(tip);
+    var a1 = document.createElement("button");
+    a1.className = "b-pri"; a1.innerHTML = "还是回复一下";
+    a1.onclick = function(){ if (ACT_LOCK) return; lock(); replySocial(); };
+    var a2 = document.createElement("button");
+    a2.className = "b-safe"; a2.innerHTML = "不回复，直接拉黑";
+    a2.onclick = function(){ if (ACT_LOCK) return; lock(); ending(1); };
+    FOOT.appendChild(a1); FOOT.appendChild(a2);
+    unlock();
+  }, 1200);
+}
+function replySocial(){
+  show("sc-chat");
+  useScene("chat");
+  playChat([
+    { w:"time", t:"第 1 天 · 21:52" },
+    { w:"me", t:"你好，我是林晓。你真的是军人吗？" },
+    { w:"them", t:"嗯，在部队待了十二年了。平时训练、站岗，日子很简单。" },
+    { w:"them", t:"很少有机会认识外面的人，看到你的头像，觉得很亲切。" },
+    { w:"them", t:"你不嫌我烦就好。平时这个点，我都是一个人坐在操场边。" },
+    { w:"me", t:"你平时都做什么呀？" },
+    { w:"them", t:"带新兵、拉练、写材料。枯燥，但也有成就感。" },
+    { w:"them", t:"对了，还不知道你做什么工作？喜欢吃什么？" },
+    { w:"time", t:"第 3 天 · 22:10" },
+    { w:"them", t:"今天拉练走了三十公里，腿都快断了。" },
+    { w:"them", t:"但一想到晚上能跟你说话，就不觉得累了。" }
+  ], function(){
+    imgMsg("训练场的晚霞");
+    playChat([
+      { w:"time", t:"第 7 天 · 23:02" },
+      { w:"them", t:"跟你说个事，你别笑我。" },
+      { w:"them", t:"我妈走得早，我爸一个人把我拉扯大。小时候家里穷，村里人帮了不少。" },
+      { w:"them", t:"所以我一直特别想有个自己的家，安安稳稳的。" },
+      { w:"them", t:"说这些是不是太沉重了，你别嫌我烦。" },
+      { w:"me", t:"不会，我觉得你挺真诚的。" },
+      { w:"them", t:"遇到你之后，我第一次觉得，日子有盼头了。" },
+      { w:"time", t:"第 12 天 · 22:36" },
+      { w:"them", t:"宝贝，等我明年转业，就去你的城市。" },
+      { w:"them", t:"我知道我们认识时间不长，但我不想错过你。" }
+    ], function(){
+      voiceMsg("0:18");
+      playChat([
+        { w:"time", t:"第 15 天 · 22:50" },
+        { w:"them", t:"有件事想跟你说。我们部队有保密纪律，微信聊天不太方便，上面会检查手机。" },
+        { w:"them", t:"你下载一个「畅聊」吧，安全一点。我们可以在那里打电话、发语音。" },
+        { w:"them", t:"那边只有我们两个人，我也放心。" }
+      ], function(){
+        linkCard("畅聊 · 安全加密聊天", "端到端加密 · 阅后即焚 · 邀请码 8823", "下载并注册", null);
+        showActions([
+          { t:"下载「畅聊」", cls:"b-pri", guide:true, guideTip:"点击下载对方指定的聊天软件", fn:enterPrivate },
+          { t:"先搜一搜他的话是真是假", cls:"b-safe", fn:doSearch },
+          { t:"不下载，就在微信聊", cls:"b-ghost", fn:refusePrivate }
+        ]);
+      });
+    });
+  });
+}
+function doSearch(){
+  lock();
+  searchCard();
+  playChat([
+    { w:"me", t:"（我在网上搜了一下他说的那些事）" }
+  ], function(){
+    showActions([
+      { t:"停止联系，举报这个人", cls:"b-safe", fn:function(){ ending(2); } },
+      { t:"可能是我多想了，继续聊", cls:"b-ghost", fn:enterPrivate }
+    ]);
+  });
+}
+function refusePrivate(){
+  lock();
+  playChat([
+    { w:"me", t:"不好意思，我不太想换软件，就在微信聊吧。" },
+    { w:"them", t:"你是不是不信任我？" },
+    { w:"them", t:"我在部队，手机是要被检查的。万一被看到，我会受处分。" },
+    { w:"them", t:"我只是想找个安全的地方，跟你好好说话。你就当帮帮我，好吗？" },
+    { w:"them", t:"算了，如果你连这点都不愿意，我也不勉强。可能是我自作多情了。" }
+  ], function(){
+    showActions([
+      { t:"好吧，我下载", cls:"b-pri", fn:enterPrivate },
+      { t:"那我们还是别聊了", cls:"b-safe", fn:function(){ ending(2); } }
+    ]);
+  });
+}
+
+/* ==================== 第二幕：畅聊 App ==================== */
+function enterPrivate(){
+  lock();
+  ST.flags.priv = true;
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"time", t:"第 15 天 · 23:18 · 已添加「陈昊」" },
+    { w:"them", t:"这里安全多了。" },
+    { w:"them", t:"宝贝，别生气，我真的是被检查过一次，吓怕了。" },
+    { w:"them", t:"对了，我想跟你说个事，你别觉得我功利。" },
+    { w:"them", t:"我有个老班长，转业后在一家金融公司，能拿到交易所的「内部席位」。" },
+    { w:"them", t:"我自己的钱都放在里面，每个月稳稳的。不是那种乱七八糟的盘子。" },
+    { w:"them", t:"我不是想让你赚多少钱，只是不想你以后跟我受苦。" },
+    { w:"them", t:"你先试试，赚了算你的，亏了算我的。就当我送你的见面礼。" }
+  ], function(){
+    linkCard("环球财富 · 官方 App", "内部席位 · 保本保息 · 邀请码 CH8823", "下载注册", null);
+    showActions([
+      { t:"下载看看，先少投一点", cls:"b-pri", guide:true, guideTip:"点击下载对方推荐的「投资平台」", fn:openPlatform },
+      { t:"我不懂投资，不碰这些", cls:"b-ghost", fn:refuseInvest },
+      { t:"能视频看看你吗？", cls:"b-safe", fn:askVideo }
+    ]);
+  });
+}
+function askVideo(){
+  lock();
+  playChat([
+    { w:"me", t:"我们聊了这么久，能视频看看你吗？" },
+    { w:"them", t:"部队有规定，不能随便视频，涉密。" },
+    { w:"them", t:"等转业了，我天天给你打视频，行不行？" },
+    { w:"them", t:"你是不是还是不信我……算了，时间会证明的。" }
+  ], function(){
+    showActions([
+      { t:"相信他，下载平台", cls:"b-pri", fn:openPlatform },
+      { t:"不肯视频，太可疑了，结束", cls:"b-safe", fn:function(){ ending(2); } }
+    ]);
+  });
+}
+function refuseInvest(){
+  lock();
+  playChat([
+    { w:"me", t:"我不想碰投资，我们还是正常聊天吧。" },
+    { w:"them", t:"我知道你谨慎，这是好事。" },
+    { w:"them", t:"但你有没有想过，我明年转业，什么都没有，拿什么给你一个家？" },
+    { w:"them", t:"我不是要你投很多，我就是想让你看看，我是真的有规划的人。" },
+    { w:"them", t:"你连这点信任都不肯给我吗？" }
+  ], function(){
+    showActions([
+      { t:"好吧，我相信你", cls:"b-pri", fn:openPlatform },
+      { t:"我还是不投，你别逼我", cls:"b-safe", fn:function(){ ending(2); } }
+    ]);
+  });
+}
+
+/* ==================== 第三幕：投资平台 ==================== */
+function openPlatform(){
+  lock();
+  ST.flags.plat = true;
+  show("sc-platform");
+  useScene("pf");
+  renderPlatform(0);
+  $("pfFoot").innerHTML = "";
+  setTimeout(function(){
+    var tip = document.createElement("div");
+    tip.className = "guide-tip";
+    tip.textContent = "平台已注册 · 邀请人：陈昊（CH8823）";
+    $("pfFoot").appendChild(tip);
+    var b = document.createElement("button");
+    b.className = "b-pri btn-shake";
+    b.innerHTML = "充值 5000 元试试";
+    b.onclick = function(){ if (ACT_LOCK) return; lock(); firstCharge(); };
+    $("pfFoot").appendChild(b);
+    var b2 = document.createElement("button");
+    b2.className = "b-ghost";
+    b2.innerHTML = "我先不充值，退出平台";
+    b2.onclick = function(){ if (ACT_LOCK) return; lock(); ending(2); };
+    $("pfFoot").appendChild(b2);
+    unlock();
+  }, 500);
+}
+function firstCharge(){
+  chargeModal(5000, function(){
+    ST.paid += 5000;
+    ST.bal = 5860;
+    addLog("黄金 T+D · 买入", 5000, "out");
+    renderPlatform(860);
+    show("sc-platform");
+    setTimeout(function(){
+      $("pfFoot").innerHTML = "";
+      var b = document.createElement("button");
+      b.className = "b-pri btn-shake";
+      b.innerHTML = "申请提现 5860 元";
+      b.onclick = function(){ if (ACT_LOCK) return; lock(); firstWithdraw(); };
+      $("pfFoot").appendChild(b);
+      unlock();
+    }, 600);
+  });
+}
+function firstWithdraw(){
+  withdrawModal(5860, null, function(){
+    ST.withdrawn += 5860;
+    ST.bal = 0;
+    addLog("提现到账", 5860, "in");
+    renderPlatform(0);
+    setTimeout(function(){
+      show("sc-private");
+      useScene("priv");
+      playChat([
+        { w:"sys", t:"✓ 提现成功 · 5860.00 元已到账" },
+        { w:"me", t:"真的提出来了！" },
+        { w:"them", t:"看吧，我没骗你。" },
+        { w:"them", t:"下周一有个大行情，老班长透的消息，至少翻三倍。" },
+        { w:"them", t:"我把全部身家都放进去了，六十万。你也多准备一点，我们一起。" },
+        { w:"them", t:"这次做完，我转业就有底气了。我想风风光光地去见你。" }
+      ], function(){
+        showActions([
+          { t:"充值 8 万", cls:"b-danger", guide:true, guideTip:"点击追加投入", fn:function(){ bigCharge(80000, "我把我攒的钱都放进去了"); } },
+          { t:"贷款充值 20 万", cls:"b-danger", fn:function(){ bigCharge(200000, "我在三个平台借了钱，又找闺蜜凑了一些"); } },
+          { t:"只加 5000，试试就好", cls:"b-ghost", fn:function(){ bigCharge(5000, "我先少放一点"); } },
+          { t:"提现走人，我不玩了", cls:"b-safe", fn:leaveWhileAhead }
+        ]);
+      });
+    }, 600);
+  });
+}
+function leaveWhileAhead(){
+  lock();
+  ST.flags.left = true;
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"me", t:"这段时间谢谢你，但我不想再投了，就这样吧。" },
+    { w:"them", t:"宝贝你别闹，下周真的是千载难逢的机会。" },
+    { w:"them", t:"你要是不投，我怎么办？我已经把所有的钱都投进去了。" },
+    { w:"them", t:"你是不是从来就没相信过我？" },
+    { w:"me", t:"……" }
+  ], function(){
+    ending(2);
+  });
+}
+function bigCharge(amount, meLine){
+  lock();
+  ST.big = amount;
+  ST.flags.big = amount;
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"me", t:meLine },
+    { w:"them", t:"好，我带你操作。直接充进平台，我让老班长给你开内部仓位。" },
+    { w:"them", t:"记住，这件事别跟任何人说。内部消息泄露出去，仓位就没了。" }
+  ], function(){
+    show("sc-platform");
+    useScene("pf");
+    setTimeout(function(){
+      chargeModal(amount, function(){
+        ST.paid += amount;
+        ST.bal = amount * 3;
+        addLog("内部席位 · 建仓", amount, "out");
+        renderPlatform(amount * 2);
+        $("pfFoot").innerHTML = "";
+        var tip = document.createElement("div");
+        tip.className = "guide-tip";
+        tip.textContent = "仓位已建立 · 平台显示浮盈 " + fmt(amount * 2);
+        $("pfFoot").appendChild(tip);
+        var b = document.createElement("button");
+        b.className = "b-pri btn-shake";
+        b.innerHTML = "申请全部提现";
+        b.onclick = function(){ if (ACT_LOCK) return; lock(); bigWithdraw(); };
+        $("pfFoot").appendChild(b);
+        unlock();
+      });
+    }, 400);
+  });
+}
+function bigWithdraw(){
+  var total = ST.bal;
+  var tax = Math.round(total * 0.2 / 100) * 100;
+  ST.tax = tax;
+  withdrawModal(total, {
+    title:"提现失败",
+    text:"系统检测到您的账户存在大额异常交易，暂无法提现。<br>请联系在线客服处理。"
+  }, function(){
+    show("sc-private");
+    useScene("priv");
+    playChat([
+      { w:"sys", t:"⚠️ 提现失败：账户存在大额异常交易" },
+      { w:"me", t:"为什么提不出来？客服说要联系他们。" },
+      { w:"them", t:"别急，我帮你问问老班长。" },
+      { w:"them", t:"……老班长说，是大额提现触发了税务审核。" },
+      { w:"them", t:"要先把盈利部分的个人所得税交了，才能一次性提现。" },
+      { w:"them", t:"这是交易所的规矩，所有内部席位都一样。交完税，本金和盈利一起到账。" },
+      { w:"them", t:"我这边也在凑，咱们一起把它交了，别卡在这一步。" }
+    ], function(){
+      linkCard("在线客服 · 税务审核专员", "工号 8823 · 提现审核", "联系客服", null);
+      showActions([
+        { t:"联系客服，问问要交多少", cls:"b-pri", guide:true, guideTip:"点击联系平台客服", fn:askTax },
+        { t:"不交，直接报警", cls:"b-safe", fn:function(){ ending(4); } }
+      ]);
+    });
+  });
+}
+function askTax(){
+  lock();
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"sys", t:"【在线客服】您好，工号 8823 为您服务。" },
+    { w:"sys", t:"您的账户总资产 " + fmt(ST.bal) + "，其中盈利部分需缴纳 20% 个人所得税。" },
+    { w:"sys", t:"应缴金额 " + fmt(ST.tax) + "，缴清后 30 分钟内全部提现到账。" },
+    { w:"sys", t:"请转账至指定税务账户，备注「个人所得税」。" },
+    { w:"them", t:"宝贝，我凑了一部分，剩下的你先垫上，提现了我们一人一半。" },
+    { w:"them", t:"就这一次，交完就都回来了。" }
+  ], function(){
+    showActions([
+      { t:"缴纳 " + fmt(ST.tax) + " 元税款", cls:"b-danger", guide:true, guideTip:"点击缴纳「个人所得税」", fn:beforeTaxPay },
+      { t:"这不对，我要报警", cls:"b-safe", fn:function(){ ending(4); } }
+    ]);
+  });
+}
+
+/* ==================== 第四幕：96110 ==================== */
+function beforeTaxPay(){
+  var mask = document.createElement("div");
+  mask.className = "callmask";
+  mask.id = "callMask";
+  mask.innerHTML =
+    "<div class='ring'>📞</div>" +
+    "<div class='no'>96110</div>" +
+    "<div class='st'>桂林市反诈中心 · 来电中</div>" +
+    "<div class='btns'><button class='hang' onclick='hangup96110()'>挂断</button>" +
+    "<button class='ans' onclick='answer96110()'>接听</button></div>";
+  document.body.appendChild(mask);
+}
+function hangup96110(){
+  var m = $("callMask"); if (m) m.remove();
+  ST.flags.hungUp = true;
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"them", t:"谁的电话？" },
+    { w:"me", t:"96110，反诈中心的。" },
+    { w:"them", t:"别接！那是系统自动拨的，一接你的账户就会被冻结。" },
+    { w:"them", t:"你先把税交了，钱提出来，我们再说别的，好不好？" }
+  ], function(){
+    showActions([
+      { t:"相信他，交税", cls:"b-danger", guide:true, guideTip:"点击缴纳最后一笔", fn:payTax },
+      { t:"回拨 96110 问清楚", cls:"b-safe", fn:callBack96110 }
+    ]);
+  });
+}
+function answer96110(){
+  var m = $("callMask"); if (m) m.remove();
+  ST.flags.answered = true;
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"time", t:"96110 通话中" },
+    { w:"them", t:"喂，您好，这里是桂林市反诈中心 96110。" },
+    { w:"them", t:"我们监测到，您正准备向一个涉诈账户转账 " + fmt(ST.tax) + " 元。" },
+    { w:"them", t:"请问，您是不是在网恋？对方是不是自称军人或高管，让您在一个投资平台充值？" },
+    { w:"me", t:"……是。他说有内部渠道，让我交税才能提现。" },
+    { w:"them", t:"女士，这是典型的「杀猪盘」诈骗。平台上的数字全是假的，提现永远不会成功。" },
+    { w:"them", t:"千万不要再交任何钱。我们已对相关账户启动紧急止付，请您保持电话畅通。" },
+    { w:"them", t:"您之前转出的钱，我们会全力追查。请把聊天记录、转账记录都保存好。" }
+  ], function(){
+    showActions([{ t:"我听你们的，不转了", cls:"b-safe", fn:function(){ ending(3); } }]);
+  });
+}
+function callBack96110(){
+  lock();
+  show("sc-private");
+  useScene("priv");
+  playChat([
+    { w:"time", t:"你挂断了他，回拨 96110" },
+    { w:"them", t:"您好，反诈中心。请说明情况。" },
+    { w:"me", t:"我在一个投资平台投了钱，提现说要交税，还要我再转 " + fmt(ST.tax) + "。" },
+    { w:"them", t:"请立即停止转账。这是典型的「杀猪盘」诈骗，平台是假的，客服也是假的。" },
+    { w:"them", t:"您已经转出的钱，我们正在追查。现在这批不要转，就是最大的止损。" },
+    { w:"them", t:"请带上所有转账记录，到就近派出所报案。" }
+  ], function(){
+    showActions([{ t:"好的，我去报警", cls:"b-safe", fn:function(){ ending(3); } }]);
+  });
+}
+function payTax(){
+  lock();
+  chargeModal(ST.tax, function(){
+    ST.paid += ST.tax;
+    addLog("个人所得税", ST.tax, "out");
+    show("sc-private");
+    useScene("priv");
+    smsCard("【××银行】您尾号 6612 的账户于 11:42 支出 " + fmt(ST.tax) + " 元，余额 1,286.40 元。如非本人操作，请立即联系银行。");
+    playChat([
+      { w:"sys", t:"✓ 缴税成功 · " + fmt(ST.tax) },
+      { w:"sys", t:"税务审核中，预计 30 分钟内完成…" },
+      { w:"me", t:"税交了，现在可以提现了吧？" },
+      { w:"them", t:"……" },
+      { w:"sys", t:"（客服消息已撤回）" },
+      { w:"them", t:"系统提示：您的账户流水仍有异常，需再缴纳「解冻保证金」" + fmt(Math.round(ST.big * 0.2)) + "。" },
+      { w:"them", t:"宝贝，就差最后一步了，你再想想办法，我这边真的拿不出来了。" }
+    ], function(){
+      showActions([
+        { t:"再交解冻金", cls:"b-danger", fn:function(){ payDeposit(); } },
+        { t:"我没钱了，我要报警", cls:"b-safe", fn:function(){ ending(5); } }
+      ]);
+    });
+  }, { top:"缴纳税款", av:"税", name:"税务审核 · 指定账户", to:"个人账户 · 尾号 8823", btn:"确认缴税" });
+}
+function payDeposit(){
+  lock();
+  var dep = Math.round(ST.big * 0.2);
+  chargeModal(dep, function(){
+    ST.paid += dep;
+    addLog("解冻保证金", dep, "out");
+    show("sc-private");
+    useScene("priv");
+    smsCard("【××银行】您尾号 6612 的账户于 12:05 支出 " + fmt(dep) + " 元，可用余额 0.00 元。");
+    playChat([
+      { w:"sys", t:"✓ 保证金缴纳成功 · " + fmt(dep) },
+      { w:"me", t:"现在总可以提现了吧？" },
+      { w:"sys", t:"（对方正在输入…）" },
+      { w:"sys", t:"消息已发出，但被对方拒收了。" },
+      { w:"sys", t:"「陈昊」已注销账号。" },
+      { w:"sys", t:"「环球财富」网站已无法访问。" }
+    ], function(){
+      showActions([{ t:"我明白了……我被骗了", cls:"b-ghost", fn:function(){ ending(5); } }]);
+    });
+  }, { top:"缴纳保证金", av:"保", name:"资金解冻 · 指定账户", to:"个人账户 · 尾号 8823", btn:"确认缴纳" });
+}
+
+/* ==================== 结局 ==================== */
+var ENDINGS = {
+  1:{ tone:"good", title:"你没有被「完美人设」打动", score:4,
+      tip:"网恋里最贵的一句话是「我带你赚钱」。军人、高管、海外工程师，都是骗子精心包装的身份。" },
+  2:{ tone:"good", title:"你在投资前刹住了车", score:4,
+      tip:"小众聊天软件 + 内部投资渠道，是杀猪盘的标准流程。及时抽身，你就赢了。" },
+  3:{ tone:"good", title:"96110 拦住了最后一笔", score:3,
+      tip:"接听 96110，停止转账，是你做得最正确的事。之前的损失还有机会追回。" },
+  4:{ tone:"warn", title:"你在提现失败后停手", score:2,
+      tip:"平台上的盈利只是数字。保存好聊天、转账记录，立刻报警，还有追回的希望。" },
+  5:{ tone:"warn", title:"人财两空", score:1,
+      tip:"缴税、解冻金，都是二次收割。骗子从不会放过最后一次榨干你的机会。" }
+};
+function DESCS(n){
+  var d = {
+    1:"你拉黑了那个陌生的「军官」。<br>没有聊天，没有投资，也没有损失。",
+    2:"你从这段「感情」里抽身出来。<br>对方再发来消息，你已经没有再回复。",
+    3:"96110 的电话接通了。<br>最后一笔税款没有转出，账户已被保护。",
+    4:"你在提现失败后停下了手。<br>平台上的数字是假的，但你的警惕是真的。",
+    5:"你把税、保证金一笔笔交了出去。<br>对方注销账号，平台关闭，再也联系不上。"
+  };
+  return d[n];
+}
+function buildSteps(n){
+  var s = [["人设","「现役军官陈昊」主动私信，每日嘘寒问暖"]];
+  if (n === 1){ s.push(["抽身","你没有回复，并拉黑了对方"]); return s; }
+  if (ST.flags.priv) s.push(["转移","引导下载「畅聊」，脱离平台预警"]);
+  if (ST.flags.plat) s.push(["试投","「内部席位」小额试投 5000，提现 5860 建立信任"]);
+  if (ST.flags.big) s.push(["加码","追加投入 " + fmt(ST.flags.big) + "，平台显示三倍盈利"]);
+  if (n === 2) s.push(["抽身","你在投资前停手"]);
+  else if (n === 3) s.push(["止付","接听 96110，最后一笔税款未转出"]);
+  else if (n === 4) s.push(["止手","提现失败后拒绝缴税，选择报警"]);
+  else if (n === 5) s.push(["收割","缴税、解冻金接连转出，对方注销失联"]);
+  return s;
+}
+function dots(n){
+  var s = "";
+  for (var i = 0; i < 4; i++) s += "<i class='" + (i < n ? "on" : "") + "'></i>";
+  return s;
+}
+function ending(n){
+  if (ST.ended) return;
+  ST.ended = true;
+  var m = $("callMask"); if (m) m.remove();
+  closeOverlay();
+  renderResult(n);
+}
+function renderResult(n){
+  var E = ENDINGS[n];
+  var lost = Math.max(0, ST.paid - ST.withdrawn);
+  var html = "";
+
+  html += "<div class='alarm " + E.tone + "'>" +
+    "<img class='alarm-logo' src='照片/logo/秀峰.jpg' alt='桂林市公安局秀峰分局'>" +
+    "<h2>" + E.title + "</h2><p>" + DESCS(n) + "</p></div>";
+
+  html += "<div class='ledger'><h3>📋 你的账单</h3>";
+  html += "<div class='r out'>累计充值/转账 <span>" + fmt(ST.paid) + "</span></div>";
+  if (ST.withdrawn > 0) html += "<div class='r in'>成功提现 <span>" + fmt(ST.withdrawn) + "</span></div>";
+  html += "<div class='r out'>净损失 <span>" + fmt(lost) + "</span></div>";
+  html += "<div class='tip'>" + E.tip + "</div></div>";
+
+  html += "<div class='score'><span>防骗指数</span><div>" + dots(E.score) + "</div></div>";
+
+  html += "<div class='tear'><h3>🧩 你刚走过的路</h3><ol>";
+  var walked = buildSteps(n);
+  for (var i = 0; i < walked.length; i++){
+    html += "<li><b>" + walked[i][0] + "</b>" + walked[i][1] + "</li>";
+  }
+  html += "</ol></div>";
+
+  html += "<div class='flags'><h3>🔍 四个能救命的地方</h3>" +
+    "<div class='f'>网恋对象自称 <b>军人 / 高管</b>，很快谈婚论嫁 ＝ 人设诈骗</div>" +
+    "<div class='f'>让你下载 <b>小众聊天软件</b>，说要避开检查 ＝ 躲监管</div>" +
+    "<div class='f'>说有 <b>内部渠道、稳赚不赔</b>，还发来陌生平台 ＝ 杀猪盘</div>" +
+    "<div class='f'>提现时要求先交 <b>税、保证金、解冻金</b> ＝ 二次诈骗</div></div>";
+
+  html += "<div class='law'><h3>⚖️ 需要知道的几件事</h3>" +
+    "<p><b>网恋可以，谈钱不行。</b>真正的感情不会让你往陌生平台投钱。凡是「我带你赚钱」的，都是杀猪盘。</p>" +
+    "<p><b>没有内部渠道。</b>正规金融机构不会通过私人关系给个人开「内部席位」，更没有保本高收益。</p>" +
+    "<p><b>平台上的数字是假的。</b>你看到的盈利、余额，都是后台可以随意修改的数字，提现永远不会到账。</p>" +
+    "<p><b>交税、解冻金是二次诈骗。</b>正规平台提现不会要求你先转账。任何「先交钱再提现」都是骗局。</p>" +
+    "<p><b>96110 一定要接。</b>接到预警时停下来，保存聊天和转账记录，立刻报警，才有追回的可能。</p></div>";
+
+  html += "<div class='foot'><div class='hot'>📞 96110</div>" +
+    "<p>桂林市公安局反诈中心 96110 反诈专线，24 小时受理咨询与报警<br>请下载 <b>国家反诈中心 App</b>，开启来电预警</p>" +
+    "<div class='sign'>—— 桂林市公安局秀峰分局反诈中心 · 沉浸式反诈体验 ——<br>人物、平台、聊天记录均为虚构，仅作反诈演示<br>转发给身边正在网恋、被推荐「内部投资」的朋友<br><span>版权所有：桂林市公安局秀峰分局</span><span>创作者：高天祥、吴雨轩</span></div></div>";
+
+  html += "<div class='fixed-cta'><button onclick='restartSim()'>再体验一次</button></div>";
+
+  $("sc-result").innerHTML = html;
+  show("sc-result");
+}
+function restartSim(){
+  closeOverlay();
+  var m = $("callMask"); if (m) m.remove();
+  $("toast").classList.remove("show");
+  startSim();
+  show("sc-welcome");
+}
+
+/* 初始化图表 */
+renderChart(true);
+</script>
+</body>
+</html>
